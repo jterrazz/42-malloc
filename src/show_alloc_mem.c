@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:06:42 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/17 17:00:37 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:21:09 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@ t_range *get_last_range(t_range *range) {
   }
 
   return range;
+}
+
+// TODO Check the printed size is real
+// TODO Check a full sized malloc of the map is working
+// TODO getPageSize()
+// TODO Check address + int will make different value with cast in char* or no cast
+
+static void print_block_list(t_block *block) {
+  char *start_address = NULL;
+  char *end_address = NULL;
+
+  while (block) {
+    start_address = (char *) SHIFT_BLOCK(block);
+    end_address = start_address + block->data_size; // TODO -1 ????
+    printf("%p - %p : %zu octets\n", start_address, end_address, block->data_size);
+    block = block->next;
+  }
 }
 
 void show_alloc_mem() {
@@ -37,6 +54,10 @@ void show_alloc_mem() {
     }
     printf("=   -> Total size: %zu (free size: %zu)\n", last_range->total_size, last_range->free_size);
     printf("=   -> Contains %u blocks\n", last_range->block_count);
+
+    if (last_range->block_count)
+      print_block_list((t_block *) SHIFT_RANGE(last_range));
+
     last_range = last_range->prev;
   }
 }

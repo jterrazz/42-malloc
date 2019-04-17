@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/17 16:10:52 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/17 19:02:31 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@
     struct s_range *next;
     t_range_group group;
     size_t total_size; // Maybe delete
-    size_t free_size; // Maybe delete
-    unsigned int block_count;
+    size_t free_size; // Maybe delete // overflow case
+    size_t block_count;
   } t_range;
 
   /*
