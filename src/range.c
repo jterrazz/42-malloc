@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/17 16:22:33 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/18 16:14:42 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ static t_range *new_range(t_range_group group, size_t block_size) {
     range->free_size = range_size - sizeof(t_range); // Check that -1 ???
   }
 
-  printf("Created a new range: ");
-  printf("total size %d // free size %d\n", (int)range->total_size, (int)range->free_size);
-
   return range;
 }
 
@@ -50,7 +47,6 @@ t_range *get_range_of_block_size(const size_t size) { // Think about sizeof(stru
   t_range *current_range;
 
   current_range = find_range_in_list(default_range, range_group, size);
-  printf("Found this avaiable range: %p\n", current_range);
 
   if (current_range == NULL) {
     current_range = new_range(range_group, size);
