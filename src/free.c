@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/18 18:38:36 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:44:20 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ static void convert_ptr(t_range **found_range, t_block **found_block, t_range *r
 
   while (range) {
     block = (t_block *)SHIFT_RANGE(range);
-    printf("Searching range : %p\n", range);
     while (block) {
-        printf("Searching block : %p compared to %p of size %d\n", ptr, SHIFT_BLOCK(block), block->data_size);
       if ((void *) SHIFT_BLOCK(block) == ptr) {
         *found_range = range;
         *found_block = block;
@@ -31,7 +29,8 @@ static void convert_ptr(t_range **found_range, t_block **found_block, t_range *r
   }
 }
 
-void merge_near_freed_blocks(t_range *range, t_block *block) {
+// Explain why we merge in readme => so we use the freed space more efficiently (bonus defrag)
+void merge_near_freed_blocks(t_range *range, t_block *block) { // check if doesnt make problem with sizes
     if (block->prev && block->prev->freed) {
         block->prev->next = block->next;
         block->prev->data_size += block->data_size + sizeof(t_block);
@@ -55,8 +54,32 @@ void remove_if_last_block(t_range *range, t_block *block) {
 }
 
 void unmap_if_empty(t_range *range) {
-    if (!range->block_count) {
-        munmap(range, range->total_size);
+    t_range *static_range = get_default_range();
+    bool is_last = FALSE;
+    size_t unmap_size = 0;
+
+    if (range->prev) {
+        range->prev->next = range->next;
+    }
+    if (range->next) {
+        range->next->prev = range->prev;
+    }
+    if ((range == static_range) || (!range->next && !range->prev)) {
+        if (!range->block_count)
+            is_last = TRUE;
+        unmap_size = range->total_size;
+        set_default_range(range->next);
+    }
+    // if (is_last) {
+    //     printf("HEllo4\n");
+    //     munmap(range, unmap_size);
+    // }
+}
+
+void print_range_list(t_range *range) {
+    while (range) {
+        printf("Range %p with group %d with total size: %zu (next: %p, prev: %p)\n", range, range->group, range->total_size, range->next, range->prev);
+        range = range->next;
     }
 }
 
@@ -64,22 +87,19 @@ void free(void *ptr) {
   t_range *range = get_default_range();
   t_block *block = NULL; // TODO Not sure, compare the segfaults
 
-  printf("CALLING FREE\n");
+  print_range_list(range);
 
   if (!ptr || !range)
     return;
 
   convert_ptr(&range, &block, range, ptr);
-  printf("Pointer 1 : %p\n", range);
-  printf("Pointer 2 : %p\n", block);
 
   if (block && range) {
       block->freed = TRUE;
       // Clean if in the last blocks // maybe merge if next to others freed
       merge_near_freed_blocks(range, block);
+
       remove_if_last_block(range, block);
-      //   block->prev->next = NULL;
-      //   range->block_count--;
   }
   unmap_if_empty(range);
 }

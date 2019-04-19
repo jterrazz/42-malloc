@@ -6,13 +6,15 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:06:42 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/18 16:14:20 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:39:40 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 t_range *get_last_range(t_range *range) {
+  if (!range)
+    return NULL;
   while (range->next) {
     range = range->next;
   }

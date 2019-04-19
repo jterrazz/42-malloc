@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/18 13:57:09 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:38:37 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #define SMALL_BLOCK_SIZE 1000
 
 #include <stdio.h>
+#include <unistd.h> // Maybe delete ?
 #include <stdlib.h> // Maybe delete ?
 #include <sys/mman.h>
 
