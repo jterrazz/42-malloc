@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/18 16:14:42 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/20 12:13:59 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static t_range *find_range_in_list(const t_range *list_start, const t_range_group group, const size_t required_size) {
   t_range *range_el = (t_range *) list_start;
+
+  // Search a freed block available
 
   while (range_el) {
     if (range_el->group == group && range_el->free_size >= required_size) // get required range size = required_size + sizeofs

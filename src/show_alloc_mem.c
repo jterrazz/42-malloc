@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:06:42 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/19 17:39:40 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/20 12:02:24 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ static void print_block_list(t_block *block) {
   while (block) {
     start_address = (char *)SHIFT_BLOCK(block);
     end_address = start_address + block->data_size; // TODO -1 ????
-    printf("%p - %p : %zu octets\n", start_address, end_address,
-           block->data_size);
+    printf("%p - %p : %zu octets (freed: %d)\n", start_address, end_address,
+           block->data_size, block->freed);
+    // if (!block->freed)
+    //     printf("%p - %p : %zu octets\n", start_address, end_address,
+    //            block->data_size);
     block = block->next;
   }
 }

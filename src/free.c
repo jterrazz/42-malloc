@@ -6,13 +6,13 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/19 17:44:20 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/20 20:40:32 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-static void convert_ptr(t_range **found_range, t_block **found_block, t_range *range, void *ptr) {
+void convert_ptr(t_range **found_range, t_block **found_block, t_range *range, void *ptr) {
   t_block *block = NULL;
 
   while (range) {
@@ -29,35 +29,54 @@ static void convert_ptr(t_range **found_range, t_block **found_block, t_range *r
   }
 }
 
-// Explain why we merge in readme => so we use the freed space more efficiently (bonus defrag)
-void merge_near_freed_blocks(t_range *range, t_block *block) { // check if doesnt make problem with sizes
+// TODO Check if merging two first one works
+static void merge_prev_blocks(t_range *range, t_block *block) {
     if (block->prev && block->prev->freed) {
         block->prev->next = block->next;
+        if (block->next)
+            block->next->prev = block->prev;
         block->prev->data_size += block->data_size + sizeof(t_block);
         range->block_count--;
-        merge_near_freed_blocks(range, block->prev);
-    } else if (block->next && block->next->freed) {
-        block->next->prev = block->prev;
-        block->next->data_size += block->data_size + sizeof(t_block);
-        range->block_count--;
-        merge_near_freed_blocks(range, block->next);
+        merge_prev_blocks(range, block->prev);
     }
+}
+
+static void merge_next_blocks(t_range *range, t_block *block) {
+    if (block->next && block->next->freed) {
+        block->next = block->next->next;
+        if (block->next->next) {
+            block->next->next->prev = block;
+        }
+        block->data_size += block->next->data_size + sizeof(t_block);
+        range->block_count--;
+        merge_next_blocks(range, block->next);
+    }
+}
+
+// Explain why we merge in readme => so we use the freed space more efficiently (bonus defrag)
+// TODO CHeck merged block on both sides will give the good size
+void merge_near_freed_blocks(t_range *range, t_block *block) { // check if doesnt make problem with sizes
+    merge_next_blocks(range, block);
+    merge_prev_blocks(range, block);
 }
 
 void remove_if_last_block(t_range *range, t_block *block) {
-    if (block->freed && !block->next && block->prev) {
-        block->prev->next = NULL;
+    if (block->freed && !block->next) {
+        if (block->prev)
+            block->prev->next = NULL;
         range->free_size += block->data_size + sizeof(t_block);
+        range->block_count--;
     }
     // Add to free size
-    range->block_count--;
 }
 
 void unmap_if_empty(t_range *range) {
-    t_range *static_range = get_default_range();
+    t_range *static_range = get_default_range(); // Check if we can remove is_alst and unmap_size
     bool is_last = FALSE;
     size_t unmap_size = 0;
 
+    if (range->block_count)
+        return;
     if (range->prev) {
         range->prev->next = range->next;
     }
@@ -70,24 +89,14 @@ void unmap_if_empty(t_range *range) {
         unmap_size = range->total_size;
         set_default_range(range->next);
     }
-    // if (is_last) {
-    //     printf("HEllo4\n");
-    //     munmap(range, unmap_size);
-    // }
+    if (is_last)
+        munmap(range, unmap_size);
 }
 
-void print_range_list(t_range *range) {
-    while (range) {
-        printf("Range %p with group %d with total size: %zu (next: %p, prev: %p)\n", range, range->group, range->total_size, range->next, range->prev);
-        range = range->next;
-    }
-}
-
+// TODO Check we set free_size everywhere
 void free(void *ptr) {
   t_range *range = get_default_range();
   t_block *block = NULL; // TODO Not sure, compare the segfaults
-
-  print_range_list(range);
 
   if (!ptr || !range)
     return;
@@ -98,10 +107,9 @@ void free(void *ptr) {
       block->freed = TRUE;
       // Clean if in the last blocks // maybe merge if next to others freed
       merge_near_freed_blocks(range, block);
-
       remove_if_last_block(range, block);
+      unmap_if_empty(range);
   }
-  unmap_if_empty(range);
 }
 // Test the merging is working
 
