@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 18:14:19 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 18:17:50 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 // }
 
 void *realloc(void *ptr, size_t size) {
-	ft_putstr("Realloc here\n");
+	// ft_putstr("Realloc here\n");
 	t_range *range = get_default_range();
 	t_block *block = NULL;
 	void *new_ptr;

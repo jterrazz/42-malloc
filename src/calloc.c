@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:42:17 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 17:56:05 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 18:18:04 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void *calloc(size_t count, size_t size) {
 	size_t malloc_size = size * count;
-	ft_putstr("Calloc here\n");
+	// ft_putstr("Calloc here\n");
 
 	// Check if result is bigger than size_t_max ?
 	void *ptr = malloc(malloc_size);
