@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 16:05:06 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 16:51:04 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ void *realloc(void *ptr, size_t size) {
 	if (size == block->data_size)
 		return ptr;
 
+	size_t data_size = block->data_size > size ? size : block->data_size;
+
 	ptr = malloc(size);
 	new_ptr = malloc(size);
-	ft_memmove(new_ptr, ptr, block->data_size);
+	ft_memmove(new_ptr, ptr, data_size);
 	free(ptr);
 
 	return new_ptr;

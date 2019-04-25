@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 11:28:38 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 15:49:45 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 16:51:55 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void test_show_alloc_mem_ex(void) {
 // Print and verify all struct variables (like data_size total_size)
 int main(int argc, char const *argv[]) {
 	// Replace by my libs
-	run_realloc_tests();
+	// run_realloc_tests();
 	// test_blyat();
 	// test_show_alloc_mem_ex();
 	// test_free_1();
