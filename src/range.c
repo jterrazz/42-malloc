@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 15:12:40 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 19:15:58 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_range *get_range_of_block_size(const size_t size) { // Think about sizeof(stru
 	const t_range_group range_group = get_range_group_from_block_size(size);
 	t_range *current_range;
 
-	current_range = find_range_in_list(default_range, range_group, size);
+	current_range = find_range_in_list(default_range, range_group, size + sizeof(t_block));
 
 	if (current_range == NULL) {
 		current_range = new_range(range_group, size);
