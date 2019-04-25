@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/20 17:45:21 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 16:26:57 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void reinit_freed_block(t_block *block, size_t size, t_range *range) { // TODO M
 	block->next = freed_block;
 
 	range->block_count++;
+	range->free_size -= size; // TODO Check that ???
 }
 
 static t_block *find_freed_block(size_t size, t_range **found_range) {
@@ -70,6 +71,7 @@ static t_block *fill_freed_block(size_t size) {
 void *malloc(size_t size) {
 	t_block *block = NULL;
 
+	ft_putstr("blyat");
 	if (!size)
 		return NULL;
 	block = fill_freed_block(size);
