@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 15:01:39 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 17:47:20 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void convert_ptr(t_range **found_range, t_block **found_block, t_range *range,
 }
 
 static void merge_prev_blocks(t_range *range, t_block *block) {
-	if (block->prev && block->prev->freed) {
+	if (range && block && block->prev && block->prev->freed) {
 		block->prev->next = block->next;
 		if (block->next)
 			block->next->prev = block->prev;
@@ -42,12 +42,13 @@ static void merge_prev_blocks(t_range *range, t_block *block) {
 }
 
 static void merge_next_blocks(t_range *range, t_block *block) {
-	if (block->next && block->next->freed) {
+	if (range && block && block->next && block->next->freed) {
 		block->next = block->next->next;
-		if (block->next->next) {
+		if (block->next && block->next->next) {
 			block->next->next->prev = block;
+			block->data_size += block->next->data_size +
+			                    sizeof(t_block);
 		}
-		block->data_size += block->next->data_size + sizeof(t_block);
 		range->block_count--;
 		merge_next_blocks(range, block->next);
 	}
@@ -56,9 +57,10 @@ static void merge_next_blocks(t_range *range, t_block *block) {
 // Explain why we merge in readme => so we use the freed space more efficiently (bonus defrag)
 // TODO CHeck merged block on both sides will give the good size
 void merge_near_freed_blocks(t_range *range, t_block *block) { // check if doesnt make problem with sizes
-	merge_next_blocks(range, block);
+    merge_next_blocks(range, block);
 	merge_prev_blocks(range, block);
 }
+
 
 void remove_if_last_block(t_range *range, t_block *block) {
 	if (block->freed && !block->next) {
@@ -97,7 +99,7 @@ void unmap_if_empty(t_range *range) {
 void free(void *ptr) {
 	t_range *range = get_default_range();
 	t_block *block = NULL; // TODO Not sure, compare the segfaults
-
+    ft_putstr("Free here\n");
 	if (!ptr || !range)
 		return;
 

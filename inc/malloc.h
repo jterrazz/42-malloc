@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 15:09:30 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 17:54:47 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void            set_default_range(t_range *range);
 ** Internal functions
 */
 
+void			ft_bzero(void *s, size_t n);
 void            ft_putstr(char const *s);
 void            *ft_memmove(void *dst, const void *src, size_t len);
 void            *ft_memcpy(void *dst, const void *src, size_t n);

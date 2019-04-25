@@ -6,7 +6,7 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/04/25 16:23:49 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/04/25 17:56:16 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SOURCES = block.c \
 	calloc.c \
 	free.c \
 	ft_itoa_base.c \
+	ft_bzero.c \
 	ft_putstr.c \
 	ft_memcpy.c \
 	ft_memmove.c \

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 16:47:57 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 18:06:58 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ static t_block *fill_freed_block(size_t size) {
 
 void *malloc(size_t size) {
 	t_block *block = NULL;
+	ft_putstr("Malloc here\n");
 
 	if (!size)
 		return NULL;
 	block = fill_freed_block(size);
-	if (block)
+	if (block) {
 		return SHIFT_BLOCK(block);
+	}
 
 	t_range *range = get_range_of_block_size((const size_t) size);
 	if (!range)

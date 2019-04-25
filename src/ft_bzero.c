@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calloc.c                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/21 14:42:17 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 17:56:05 by jterrazz         ###   ########.fr       */
+/*   Created: 2017/04/10 16:35:53 by jterrazz          #+#    #+#             */
+/*   Updated: 2019/04/25 17:54:40 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void *calloc(size_t count, size_t size) {
-	size_t malloc_size = size * count;
-	ft_putstr("Calloc here\n");
+void	ft_bzero(void *s, size_t n)
+{
+	char *str;
 
-	// Check if result is bigger than size_t_max ?
-	void *ptr = malloc(malloc_size);
-	// Fill with 0
-	ft_bzero(ptr, malloc_size);
-	return ptr;
+	str = (char *)s;
+	while (n--)
+		str[n] = 0;
 }
