@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 16:51:04 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/25 17:14:34 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void *realloc(void *ptr, size_t size) {
 
 	convert_ptr(&range, &block, range, ptr);
 
+	if (!ptr)
+		return malloc(size); // Check if 0
+	if (!range || !block)
+		return NULL; // Return null or pointer ?
 	if (size == block->data_size)
 		return ptr;
 
