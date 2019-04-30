@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 18:18:06 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:13:41 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,10 @@ void unmap_if_empty(t_range *range) {
 void free(void *ptr) {
 	t_range *range = get_default_range();
 	t_block *block = NULL; // TODO Not sure, compare the segfaults
-    // ft_putstr("Free here\n");
-	if (!ptr || !range)
-		return;
+    // ft_putstr("Free start\n");
+	if (!ptr || !range) {
+        return;
+    }
 
 	convert_ptr(&range, &block, range, ptr);
 
@@ -112,6 +113,7 @@ void free(void *ptr) {
 		remove_if_last_block(range, block);
 		unmap_if_empty(range);
 	}
+    // ft_putstr("Free end\n");
 }
 // Test the merging is working
 

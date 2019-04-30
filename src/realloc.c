@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 18:17:50 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:14:32 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,41 @@
 // 	return ptr;
 // }
 
+// Check other malloc functions
+
 void *realloc(void *ptr, size_t size) {
-	// ft_putstr("Realloc here\n");
+	ft_putstr("Realloc of ");
+	ft_itoa_base(size, 10, 0);
+	ft_putstr("\n");
 	t_range *range = get_default_range();
 	t_block *block = NULL;
 	void *new_ptr;
 
+	if (!size)
+		size = 32; // Maybe not ?
 	if (!ptr)
 		return malloc(size); // Check if 0
 		// if (size == 0) // Should it free the pointer ?
 		// 	return NULL; // Check is expected, size = 0 returns 32 ??
-	if (size == 0) {
-		free(ptr);
-		return malloc(32); // What is minimum sized object ?
-	}
+	// if (size == 0) {
+	// 	free(ptr);
+	// 	return malloc(32); // What is minimum sized object ?
+	// }
 
 	convert_ptr(&range, &block, range, ptr);
 
 	if (!range || !block)
-		return NULL; // Return null or pointer ?
+		return malloc(size); // Return null or pointer ?
 	if (size == block->data_size)
 		return ptr;
 
 	size_t data_size = block->data_size > size ? size : block->data_size;
 
-	ptr = malloc(size);
 	new_ptr = malloc(size);
 	ft_memmove(new_ptr, ptr, data_size);
 	free(ptr);
 
+	// ft_putstr("Realloc end\n");
 	return new_ptr;
 }
 

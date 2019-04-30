@@ -6,7 +6,7 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/04/25 17:56:16 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/04/30 16:10:38 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ OBJECTS = $(SOURCES:%.c=$(PATH_OBJ)/%.o)
 NAME = libft_malloc_$(HOSTTYPE).so
 LIB_NAME = libft_malloc.so
 
-CC = @gcc
+CC = gcc
 
 FLAGS_CC = -Wall -Wextra -Werror
 FLAGS_LIB = -shared -fPIC
@@ -63,14 +63,17 @@ FLAGS_LIB = -shared -fPIC
 
 all: $(NAME)
 
+# TODO Print logs
+
 $(NAME): $(OBJECTS)
 	$(CC) $(FLAGS_LIB) -o $@ $(OBJECTS)
 	@rm -f $(LIB_NAME)
-	@ln -s $(NAME) $(LIB_NAME)
+	ln -s $(NAME) $(LIB_NAME)
+	@echo "Make done"
 
 $(PATH_OBJ)/%.o: $(PATH_SRC)/%.c
 	@mkdir -p $(PATH_OBJ)
-	$(CC) -c -o $@ $(FLAGS_CC) $^ -O0 -g -I $(PATH_INC) # $^ ??
+	$(CC) $(FLAGS_LIB) -c -o $@ $(FLAGS_CC) $^ -O0 -g -I $(PATH_INC) # $^ ??
 
 clean:
 	@rm -rf $(PATH_OBJ)
