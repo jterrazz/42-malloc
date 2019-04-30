@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 19:15:58 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/30 17:52:31 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static t_range *new_range(t_range_group group, size_t block_size) {
 	const size_t range_size = get_range_allocation_from_block_size(
 		block_size);
 
+    // Test to return null
 	t_range *range = (t_range *)mmap(NULL, range_size,
 	                                 PROT_READ | PROT_WRITE,
 	                                 MAP_PRIVATE | MAP_ANON, -1, 0);

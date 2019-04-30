@@ -6,12 +6,13 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:42:17 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/26 16:13:34 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/04/30 17:58:07 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+// Put data to 0 in realloc// Implements overflows with example from C implemeentation
 void *calloc(size_t count, size_t size) { // If count = 0
 	// ft_putstr("Calloc start\n");
 	// ft_putstr("Count\n");
