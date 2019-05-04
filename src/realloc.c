@@ -6,45 +6,13 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/30 18:38:33 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/04 01:55:23 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-// void *realloc(void *ptr, size_t size) { // Illustrate a realloc with 2 freed objects around
-// 	t_range *range = get_default_range();
-// 	t_block *block = NULL;
-// 	t_block *start = NULL;
-//
-// 	convert_ptr(&range, &block, range, ptr);
-// 	if (size == block->data_size)
-// 		return ptr;
-// 	// TODO ONLY IF IN GROUP OF size !!!
-// 	size_t available_space_around = get_space_around_with_start(range,
-// 	                                                            block,
-// 	                                                            &start); // TODO Check doesnt break with LARGE
-// 	// If need a new block
-// 	if (size + sizeof(t_block) > available_space_around) {
-// 		ptr = malloc(size);
-// 		ft_memmove(ptr, SHIFT_BLOCK(block), block->data_size);
-// 		free(SHIFT_BLOCK(block));
-// 	} else if (size + sizeof(t_block) < available_space_around) { // Check and explain in the README why we sometimes don't reallocate with a different size
-// 		// memmove
-// 		// reange the blocks without loosing data
-// 		ptr =
-// 			SHIFT_BLOCK(realloc_in_freed_block(range, block, start,
-// 			                                   size));
-// 	}
-//
-// 	return ptr;
-// }
-
-// Check other malloc functions
 
 void *realloc(void *ptr, size_t size) {
-	ft_putstr("Realloc of ");
-	ft_itoa_base(size, 10, 0);
-	ft_putstr("\n");
 	t_range *range = get_default_range();
 	t_block *block = NULL;
 	void *new_ptr;
@@ -73,7 +41,6 @@ void *realloc(void *ptr, size_t size) {
 	ft_memmove(new_ptr, ptr, data_size);
 	free(ptr);
 
-	// ft_putstr("Realloc end\n");
 	return new_ptr;
 }
 
@@ -87,5 +54,5 @@ void *realloc(void *ptr, size_t size) {
 //
 
 // Will probably change the type too
-// Need to unmap if no more
+// Need to unmap if no more /\?
 // Illustrate a realloc with 2 freed objects around

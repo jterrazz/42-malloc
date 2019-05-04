@@ -6,15 +6,15 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/30 17:58:33 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/04 01:58:47 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 #define MALLOC_H
 
-#define SHIFT_RANGE(start) ((char *)start + sizeof(t_range)) // +1 ?
-#define SHIFT_BLOCK(start) ((char *)start + sizeof(t_block)) // +1 ?
+#define SHIFT_RANGE(start) ((char *)start + sizeof(t_range))
+#define SHIFT_BLOCK(start) ((char *)start + sizeof(t_block))
 // Verify that adding to one mapped has space for the struct
 
 #define TINY_BLOCK_SIZE 128
@@ -86,14 +86,14 @@ void            *ft_memmove(void *dst, const void *src, size_t len);
 void            *ft_memcpy(void *dst, const void *src, size_t n);
 void            ft_itoa_base(size_t nb, char base, char length);
 
+t_range			*get_last_range(t_range *range);
 void            reinit_freed_block(t_block *block, size_t size, t_range *range);
 void            print_range_group(t_range *range);
 void            convert_ptr(t_range **found_range, t_block **found_block,
                             t_range *range, void *ptr);
-void            init_empty_block(t_block *block, size_t size);
 void            *append_empty_block(t_range *range, size_t size);
 t_range         *get_range_of_block_size(const size_t size);
 t_range_group   get_range_group_from_block_size(size_t size);
-size_t          get_range_allocation_from_block_size(size_t size);
+size_t          get_range_size_from_block_size(size_t size);
 
 #endif

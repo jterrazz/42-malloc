@@ -6,13 +6,15 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 14:17:15 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 15:02:06 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/04 01:59:54 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void print_range_description(t_range *range) {
+// Show the new line and return to line
+
+static void print_range_description(t_range *range) {
 	print_range_group(range);
 	ft_putstr(" - ");
 	ft_itoa_base((size_t) range, 16, 0);

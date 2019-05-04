@@ -16,3 +16,11 @@ export DYLD_LIBRARY_PATH=.
 export DYLD_INSERT_LIBRARIES=libft_malloc.so
 export DYLD_FORCE_FLAT_NAMESPACE=1
 ```
+
+
+Realloc
+- Does set to zero a calloced zone (like the real one)
+
+Range divided in blocks
+A range is a mapped zone
+Metadatas are stocked on the mapped memory so we move

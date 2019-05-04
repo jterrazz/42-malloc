@@ -6,22 +6,13 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:06:42 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 15:02:01 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/04 02:00:30 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_range *get_last_range(t_range *range) {
-	if (!range)
-		return NULL;
-	while (range->next) {
-		range = range->next;
-	}
-
-	return range;
-}
-
+// Add uppercase on the printed addresses
 // TODO Check the printed size is real
 // TODO Check a full sized malloc of the map is working
 // TODO getPageSize()
@@ -45,26 +36,6 @@ static void print_block_list(t_block *block) {
 	}
 }
 
-void debug_range(t_range *range) {
-	int i = 0;
-	char *ptr = (char *) range;
-
-	while (i < 40) {
-		printf("%c", *(ptr + 1));
-		i++;
-	}
-}
-
-void print_range_group(t_range *range) {
-	if (range->group == TINY) {
-		ft_putstr("TINY");
-	} else if (range->group == SMALL) {
-		ft_putstr("SMALL");
-	} else {
-		ft_putstr("LARGE");
-	}
-}
-
 void show_alloc_mem() {
 	t_range *first_range = get_default_range();
 	t_range *last_range = get_last_range(first_range);
@@ -85,10 +56,6 @@ void show_alloc_mem() {
 		if (last_range->block_count)
 			print_block_list((t_block *)SHIFT_RANGE(last_range));
 
-		// debug_range(last_range);
-
 		last_range = last_range->prev;
 	}
 }
-
-// Add uppercase on the printed addresses

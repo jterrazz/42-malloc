@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/30 17:58:15 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/04 01:41:25 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,9 @@ void unmap_if_empty(t_range *range) {
 		munmap(range, unmap_size);
 }
 
-// TODO Check we set free_size everywhere
 void free(void *ptr) {
 	t_range *range = get_default_range();
 	t_block *block = NULL; // TODO Not sure, compare the segfaults
-    // ft_putstr("Free start\n");
 	if (!ptr || !range) {
         return;
     }
@@ -108,14 +106,8 @@ void free(void *ptr) {
 
 	if (block && range) {
 		block->freed = TRUE;
-		// Clean if in the last blocks // maybe merge if next to others freed
 		merge_near_freed_blocks(range, block);
 		remove_if_last_block(range, block);
 		unmap_if_empty(range);
 	}
-    // ft_putstr("Free end\n");
 }
-// Test the merging is working
-
-
-// use getrlimit()

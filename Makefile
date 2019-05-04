@@ -6,13 +6,15 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/04/30 16:10:38 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/05/04 01:59:42 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
+
+# TODO Clean the makefile
 
 # **************************************************************************** #
 # FILES             														   #
@@ -37,6 +39,7 @@ SOURCES = block.c \
 	realloc.c \
 	show_alloc_mem_ex.c \
 	show_alloc_mem.c \
+	show_range.c \
 	size.c
 
 OBJECTS = $(SOURCES:%.c=$(PATH_OBJ)/%.o)
@@ -73,7 +76,7 @@ $(NAME): $(OBJECTS)
 
 $(PATH_OBJ)/%.o: $(PATH_SRC)/%.c
 	@mkdir -p $(PATH_OBJ)
-	$(CC) $(FLAGS_LIB) -c -o $@ $(FLAGS_CC) $^ -O0 -g -I $(PATH_INC) # $^ ??
+	$(CC) -fPIC -c -o $@ $(FLAGS_CC) $^ -O0 -g -I $(PATH_INC) # $^ ??
 
 clean:
 	@rm -rf $(PATH_OBJ)
