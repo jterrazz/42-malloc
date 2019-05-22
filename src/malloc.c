@@ -6,11 +6,12 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/22 21:49:29 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/22 21:52:47 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+// Malloc 0 ???
 
 static t_block*find_freed_block(size_t size, t_range **found_range)
 {
@@ -51,20 +52,16 @@ static t_block*fill_freed_block(size_t size)
 
 void*malloc(size_t size)
 {
-    t_block *block = NULL;
+	t_range *range;
+    t_block *block;
 
-    // mmalloc 0 = 32 ?
-
-    if (!size)  // check ????
+    if (!size)
         return (NULL);
 
-    block = fill_freed_block(size);
-    if (block) {
+    if ((block = fill_freed_block(size)) != NULL)
         return (SHIFT_BLOCK(block));
-    }
 
-    t_range *range = get_range_of_block_size((const size_t)size);
-    if (!range)
+    if (!(range = get_range_of_block_size((const size_t)size)))
         return (NULL);
 
     return (append_empty_block(range, size));

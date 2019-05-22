@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/22 21:48:59 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/22 22:02:40 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ void unmap_if_empty(t_range *range)
     if (range->block_count)
         return;
 
-    if (range->prev) {
+    if (range->prev)
         range->prev->next = range->next;
-    }
-    if (range->next) {
+
+    if (range->next)
         range->next->prev = range->prev;
-    }
+
     if ((range == static_range) || (!range->next && !range->prev)) {
         if (!range->block_count)
             is_last = TRUE;

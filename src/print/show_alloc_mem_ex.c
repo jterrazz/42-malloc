@@ -6,13 +6,11 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 14:17:15 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/04 01:59:54 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/22 22:04:37 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
-// Show the new line and return to line
 
 static void print_range_description(t_range *range) {
 	print_range_group(range);
