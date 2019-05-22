@@ -24,3 +24,13 @@ Realloc
 Range divided in blocks
 A range is a mapped zone
 Metadatas are stocked on the mapped memory so we move
+
+
+
+// Explain why we merge in readme => so we use the freed space more efficiently (bonus defrag)
+
+Not using the return of munmap of purpose (because free doesnt return)
+
+
+#include <sys/mman.h>
+For mmap and munmap

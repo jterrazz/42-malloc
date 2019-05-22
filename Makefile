@@ -6,15 +6,13 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/05/04 01:59:42 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/05/22 21:17:55 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
-
-# TODO Clean the makefile
 
 # **************************************************************************** #
 # FILES             														   #
@@ -25,22 +23,11 @@ PATH_LIB = lib
 PATH_OBJ = obj
 PATH_SRC = src
 
-SOURCES = block.c \
-	calloc.c \
-	free.c \
-	ft_itoa_base.c \
-	ft_bzero.c \
-	ft_putstr.c \
-	ft_memcpy.c \
-	ft_memmove.c \
-	malloc.c \
-	range_default.c \
-	range.c \
-	realloc.c \
-	show_alloc_mem_ex.c \
-	show_alloc_mem.c \
-	show_range.c \
-	size.c
+SOURCES += block.c range_default.c range.c size.c
+SOURCES += print/show_alloc_mem_ex.c print/show_alloc_mem.c print/show_range.c
+SOURCES += utils/ft_itoa_base.c utils/ft_bzero.c utils/ft_putstr.c \
+	utils/ft_memcpy.c utils/ft_memmove.c
+SOURCES += calloc.c free.c malloc.c realloc.c
 
 OBJECTS = $(SOURCES:%.c=$(PATH_OBJ)/%.o)
 
@@ -55,8 +42,6 @@ CC = gcc
 
 FLAGS_CC = -Wall -Wextra -Werror
 FLAGS_LIB = -shared -fPIC
-# Check the reasons for lib flags
-# FLAGS_DEBUG = -g -O0
 
 # **************************************************************************** #
 # COMMANDS  		    													   #
@@ -66,8 +51,6 @@ FLAGS_LIB = -shared -fPIC
 
 all: $(NAME)
 
-# TODO Print logs
-
 $(NAME): $(OBJECTS)
 	$(CC) $(FLAGS_LIB) -o $@ $(OBJECTS)
 	@rm -f $(LIB_NAME)
@@ -75,8 +58,8 @@ $(NAME): $(OBJECTS)
 	@echo "Make done"
 
 $(PATH_OBJ)/%.o: $(PATH_SRC)/%.c
-	@mkdir -p $(PATH_OBJ)
-	$(CC) -fPIC -c -o $@ $(FLAGS_CC) $^ -O0 -g -I $(PATH_INC) # $^ ??
+	@mkdir -p $(@D)
+	$(CC) -fPIC -c -o $@ $(FLAGS_CC) $^ -O0 -g -I $(PATH_INC)
 
 clean:
 	@rm -rf $(PATH_OBJ)

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:54:01 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/04 01:34:51 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/22 21:36:57 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ void reinit_freed_block(t_block *block, size_t size, t_range *range) {
 	freed_block->freed = TRUE;
 	block->freed = FALSE;
 	block->data_size = size;
-
 	freed_block->prev = block;
 	freed_block->next = block->next;
 	block->next = freed_block;
-
 	range->block_count++;
-	range->free_size -= size; // TODO Check that ???
+	range->free_size -= size;
 }
 
 void *append_empty_block(t_range *range, size_t size) {

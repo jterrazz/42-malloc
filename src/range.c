@@ -6,11 +6,12 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/04 01:53:43 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/22 21:17:17 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+#include <sys/mman.h>
 
 static t_range *find_available_range(const t_range *list_start,
                                    const t_range_group group,

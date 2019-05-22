@@ -6,10 +6,11 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 15:31:32 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/04 01:43:29 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/22 21:20:50 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "malloc.h"
 
 void    ft_itoa_base(size_t nb, char base, char length)

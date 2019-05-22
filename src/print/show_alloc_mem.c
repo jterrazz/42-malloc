@@ -6,10 +6,11 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:06:42 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/04 02:00:30 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/22 21:23:58 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h> // TODO Delete
 #include "malloc.h"
 
 // Add uppercase on the printed addresses

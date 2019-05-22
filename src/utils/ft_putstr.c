@@ -6,10 +6,11 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 13:43:27 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 16:22:54 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/22 21:20:57 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "malloc.h"
 
 void    ft_putstr(char const *s)
