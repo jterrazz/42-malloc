@@ -6,16 +6,11 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/22 22:01:07 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/31 20:31:29 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
-/*
- realloc of 0 ?
- if (size == 0) // Should it free the pointer ?
-*/
 
 void*realloc(void *ptr, size_t size)
 {
@@ -26,6 +21,8 @@ void*realloc(void *ptr, size_t size)
 
     if (!ptr)
         return (malloc(size));
+    if (!size)
+        return (ptr);
 
     range = get_default_range();
     convert_ptr(&range, &block, range, ptr);

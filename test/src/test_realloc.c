@@ -6,21 +6,47 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 18:47:22 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/31 18:32:32 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/31 20:31:22 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// Realloc de NULL
-// Realloc de 0
-// realloc de 0 et de 1
-// Realloc from LARGE to TINY
-// Realloc from SMALL to TINY
-// Realloc from SMALL to LARGE etc
 
 #include <stdio.h>
 #include "./test.h"
 
-static void test_1()
+static void realloc_null_ptr() {
+	char *t = realloc(NULL, 5);
+
+	if (!t)
+		printf("Realloc(NULL, 5) should return ptr");
+	free(t);
+}
+
+static void realloc_0() {
+	char *t = malloc(4);
+	t = realloc(t, 0);
+
+	if (!t)
+		printf("Realloc(NULL, 5) should return the same ptr");
+	free(t);
+}
+
+static void realloc_1() {
+	char *t = malloc(1);
+	t = realloc(t, 1);
+	t = realloc(t, 10);
+	t[0] = 'A';
+	t[9] = 'A';
+	t = realloc(t, TINY_BLOCK_SIZE);
+	t = realloc(t, SMALL_BLOCK_SIZE);
+	t = realloc(t, SMALL_BLOCK_SIZE + 2);
+	t = realloc(t, 10);
+
+	if (t[0] != 'A' || t[9] != 'A')
+		printf("Realloc should copy data");
+	free(t);
+}
+
+static void realloc_large()
 {
 	char    *addr1;
 	char    *addr2;
@@ -28,12 +54,9 @@ static void test_1()
 
 	addr1 = (char *)malloc(1 * M1);
 	strcpy(addr1, "Bonjours\n");
-	printf(addr1);
 	addr2 = (char *)malloc(16 * M1);
 	addr3 = (char *)realloc(addr1, 128* M1);
 	addr3[127 * M1] = 42;
-	printf(addr3);
-	show_alloc_mem();
 	free(addr3);
 	free(addr2);
 	free(addr1);
@@ -41,6 +64,8 @@ static void test_1()
 
 void run_test_realloc(void)
 {
-    printf("Running malloc tests\n");
-    test_1();
+	realloc_null_ptr();
+	realloc_0();
+	realloc_1();
+	realloc_large();
 }

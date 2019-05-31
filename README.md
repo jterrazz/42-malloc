@@ -57,6 +57,32 @@ Not using the return of munmap of purpose (because free doesnt return)
 // TODO explain how to inject in lib
 // Make graph to show how memory behave
 
+
+TEST
+sh insert_lib.sh ls
+
+
+SPECIAL CASES
+realloc(NULL, 6);
+realloc(ptr, 0);
+Realloc with a size of zero is equivalent to free() on some C implementations, but not all.
+
+
+
+realloc is conceptually equivalent to malloc + memcpy + free on the other pointer.
+
+If the size of the space requested is zero, the behavior of realloc is implementation-defined. This is similar for all memory allocation functions that receive a size parameter of value 0. Such functions may in fact return a non-null pointer, but that must never be dereferenced.
+
+Thus, realloc(ptr,0) is not equivalent to free(ptr). It may
+
+be a "lazy" implementation and just return ptr
+free(ptr), allocate a dummy element and return that
+free(ptr) and return 0
+just return 0 for failure and do nothing else.
+So in particular the latter two cases are indistinguishable by application code.
+
+This means realloc(ptr,0) may not really free/deallocate the memory, and thus it should never be used as a replacement for free.
+
 ##Testing
 ``` bash
 make && sh ./run_test.sh

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 18:47:16 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/31 19:22:23 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/31 20:10:51 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 #include <stdio.h>
 #include <unistd.h>
 
-// TODO Check the printer function with hexadecimals + Add the last line and
-// returns to line
-
 static void test_malloc_null()
 {
     void *t = malloc(0);
     if (t)
-        printf("malloc(0) should return NULL");
+        printf("malloc(0) should return NULL\n");
     free(t);
 }
 
 static void test_malloc_one()
 {
     char *t = (char *)malloc(1);
+    if (!t) {
+        printf("malloc(1) should return ptr\n");
+        return;
+    }
     t[0] = 0;
     free(t);
 }
@@ -50,7 +51,7 @@ static void test_malloc_limits()
     free(t0);
 
     t0 = malloc(TINY_BLOCK_SIZE - sizeof(t_block));
-    show_alloc_mem();
+    // show_alloc_mem();
     free(t0);
     free(t00);
     free(t000);

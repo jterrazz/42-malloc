@@ -6,7 +6,7 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/05/31 14:39:16 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/05/31 20:10:27 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIB_PATH = ..
 BUILD_PATH = obj
 SRC_PATH = src
 
-SOURCES = main.c test_malloc.c test_realloc.c test_mixed.c print.c
+SOURCES = main.c test_malloc.c test_realloc.c test_mixed.c print.c test_limit.c
 LIB_SOURCES = -L.. -lft_malloc
 
 OBJECTS = $(SOURCES:%.c=$(BUILD_PATH)/%.o)
