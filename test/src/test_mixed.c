@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   test_mixed.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/20 11:28:38 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/04/25 16:51:55 by jterrazz         ###   ########.fr       */
+/*   Created: 2019/05/30 18:47:10 by jterrazz          #+#    #+#             */
+/*   Updated: 2019/05/31 18:29:24 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Free need to decrease the range count
-#include "test.h"
-#include "malloc.h"
+#include <stdio.h>
+#include "./test.h"
 
-static void show_range_list() {
-	t_range *range = get_default_range();
-	// t_block *block =
-
-	printf("RANGE LIST\n");
-
-	int i = 0;
-	while (range) {
-		printf(
-			"%d. Range %p, prev: %p, next: %p (count: %zu, group: %d, total size: %zu, free_space: %zu)\n",i, range, range->prev, range->next, range->block_count, range->group, range->total_size,
-			range->free_size);
-		range = range->next;
-		i++;
-	}
-}
-
-// Merging the two firsts
 static void test_free_1(void) {
 	show_alloc_mem();
 	show_range_list();
@@ -121,19 +103,12 @@ void test_show_alloc_mem_ex(void) {
 	free(test2);
 }
 
-// TODO Test with leaks !!!
-// Check norminette on project
-// Check the total size allocated is what expected
-
-// TODO explain how to inject in lib
-// Realloc test on + 5 address
-// Print and verify all struct variables (like data_size total_size)
-int main(int argc, char const *argv[]) {
-	// Replace by my libs
-	// run_realloc_tests();
+void run_test_mixed(void)
+{
+    printf("OK\n");
+	test_free_1();
 	// test_blyat();
 	// test_show_alloc_mem_ex();
-	// test_free_1();
 	// test_free_2();
 	// test_free_3();
 	// test_realloc_1();
@@ -167,16 +142,3 @@ int main(int argc, char const *argv[]) {
 	// show_alloc_mem();
 	// show_range_list();
 }
-
-// TODO On the readme show an integration by replacing free of the system with things like ls / ls -l / etc
-
-// Check if we dont reallocate or insert using search in the others types (SMALL TINY ETC) => for malloc and realloc
-
-// TODO use getrlimit ???
-
-// TODO Remove all printf
-// TOOD Check is using a range until the end
-
-// TESTS Tinies goes in tiny even with freed blocks in SMALL => MALLOC + REALLOC
-
-// TODO Get tests for all githubs

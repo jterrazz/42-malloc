@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 14:17:15 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/22 22:04:37 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/31 19:27:58 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static void print_range_description(t_range *range) {
 	print_range_group(range);
 	ft_putstr(" - ");
-	ft_itoa_base((size_t) range, 16, 0);
+	ft_itoa_base((size_t) range, 16, 0, TRUE);
 	ft_putstr("\n");
 }
 
 static void print_range_hex_line(char *start) {
-	ft_itoa_base((size_t) start, 16, 0);
+	ft_itoa_base((size_t) start, 16, 0, TRUE);
 	unsigned int i = 0;
 
 	while (i < 16) {
 		ft_putstr(" ");
-		ft_itoa_base((unsigned char) start[i], 16, 2);
+		ft_itoa_base((unsigned char) start[i], 16, 2, TRUE);
 		i++;
 	}
 	ft_putstr("\n");

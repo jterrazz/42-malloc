@@ -6,12 +6,24 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/22 21:57:25 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/31 18:13:28 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <sys/mman.h>
+
+t_range*get_last_range(t_range *range)
+{
+    if (!range)
+        return (NULL);
+
+    while (range->next) {
+        range = range->next;
+    }
+
+    return (range);
+}
 
 static t_range*find_available_range(const t_range *list_start,
     const t_range_group group,
@@ -31,12 +43,12 @@ static t_range*find_available_range(const t_range *list_start,
 
 static t_range*new_range(t_range_group group, size_t block_size)
 {
-    const size_t range_size = get_range_size_from_block_size(
-        block_size);
+    size_t	range_size;
+    t_range	*range;
 
-    t_range *range = (t_range *)mmap(NULL, range_size,
-        PROT_READ | PROT_WRITE,
-        MAP_PRIVATE | MAP_ANON, -1, 0);
+    range_size = get_range_size_from_block_size(block_size);
+    range = (t_range *)mmap(NULL, range_size,
+        PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
 
     if (range) {
         range->prev		= NULL;

@@ -6,12 +6,11 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/22 21:52:47 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/05/31 19:22:05 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-// Malloc 0 ???
 
 static t_block*find_freed_block(size_t size, t_range **found_range)
 {

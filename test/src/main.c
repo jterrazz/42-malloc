@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_range.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/04 01:57:33 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/30 18:14:21 by jterrazz         ###   ########.fr       */
+/*   Created: 2019/04/20 11:28:38 by jterrazz          #+#    #+#             */
+/*   Updated: 2019/05/31 18:31:41 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include <stdio.h>
+#include "./test.h"
 
-void print_range_group(t_range *range) {
-	if (range->group == TINY) {
-		ft_putstr("TINY");
-	} else if (range->group == SMALL) {
-		ft_putstr("SMALL");
-	} else {
-		ft_putstr("LARGE");
-	}
+// TODO use getrlimit + setrlimit
+// TODO Remove all printf
+
+int main(void) {
+	run_test_malloc();
+	// run_test_mixed();
 }

@@ -6,67 +6,59 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/05/30 18:58:07 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/05/31 14:39:16 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-ifeq ($(HOSTTYPE),)
-	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
-endif
 
 # **************************************************************************** #
 # FILES             														   #
 # **************************************************************************** #
 
-PATH_INC = inc
-PATH_LIB = lib
-PATH_OBJ = obj
-PATH_SRC = src
+INC_PATH = ../inc
+LIB_PATH = ..
+BUILD_PATH = obj
+SRC_PATH = src
 
-SOURCES += block.c range_default.c range.c size.c
-SOURCES += print/show_alloc_mem_ex.c print/show_alloc_mem.c print/show_range.c
-SOURCES += utils/ft_itoa_base.c utils/ft_bzero.c utils/ft_putstr.c \
-	utils/ft_memcpy.c utils/ft_memmove.c
-SOURCES += calloc.c free.c malloc.c realloc.c
+SOURCES = main.c test_malloc.c test_realloc.c test_mixed.c print.c
+LIB_SOURCES = -L.. -lft_malloc
 
-OBJECTS = $(SOURCES:%.c=$(PATH_OBJ)/%.o)
+OBJECTS = $(SOURCES:%.c=$(BUILD_PATH)/%.o)
 
 # **************************************************************************** #
 # VARIABLES         														   #
 # **************************************************************************** #
 
-NAME = libft_malloc_$(HOSTTYPE).so
-LIB_NAME = libft_malloc.so
+NAME = test
 
 CC = gcc
 
-FLAGS_CC = -Wall -Wextra -Werror
-FLAGS_LIB = -shared -fPIC
+FLAGS_CC = # -Wall -Wextra -Werror
 
 # **************************************************************************** #
 # COMMANDS  		    													   #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	$(CC) $(FLAGS_LIB) -o $@ $(OBJECTS)
-	@rm -f $(LIB_NAME)
-	ln -s $(NAME) $(LIB_NAME)
-	@echo "Make done"
+	@make -C $(LIB_PATH)
+	$(CC) $(FLAGS_CC) -o $@ $^ $(LIB_SOURCES)
+	@echo "Compilation successful"
 
-$(PATH_OBJ)/%.o: $(PATH_SRC)/%.c
+$(BUILD_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(@D)
-	$(CC) -fPIC -c -o $@ $(FLAGS_CC) $^ -O0 -g -I $(PATH_INC)
+	$(CC) $(FLAGS_CC) -c -o $@ $< -I $(INC_PATH)
 
 clean:
-	@rm -rf $(PATH_OBJ)
-	@echo "Clean done"
+	@make clean -C $(LIB_PATH)
+	@rm -rf $(BUILD_PATH)
+	@echo "Clean \033[33mok\033[0m"
 
 fclean: clean
+	@make fclean -C $(LIB_PATH)
 	@rm -f $(NAME) $(LIB_NAME)
-	@echo "Fclean done"
+	@echo "Fclean \033[33mok\033[0m"
 
 re: fclean $(NAME)
