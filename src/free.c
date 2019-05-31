@@ -13,107 +13,107 @@
 #include "malloc.h"
 #include <sys/mman.h>
 
-void convert_ptr(t_range **found_range,
+void convert_ptr(t_heap **found_heap,
     t_block **found_block,
-    t_range *range,
+    t_heap *heap,
     void *ptr)
 {
     t_block *block = NULL;
 
-    while (range) {
-        block = (t_block *)SHIFT_RANGE(range);
+    while (heap) {
+        block = (t_block *)SHIFT_HEAP(heap);
         while (block) {
             if ((void *)SHIFT_BLOCK(block) == ptr) {
-                *found_range	= range;
+                *found_heap	= heap;
                 *found_block	= block;
                 return;
             }
             block = block->next;
         }
-        range = range->next;
+        heap = heap->next;
     }
 }
 
-static void merge_prev_blocks(t_range *range, t_block *block)
+static void merge_prev_blocks(t_heap *heap, t_block *block)
 {
-    if (range && block && block->prev && block->prev->freed) {
+    if (heap && block && block->prev && block->prev->freed) {
         block->prev->next = block->next;
         if (block->next)
             block->next->prev = block->prev;
         block->prev->data_size += block->data_size + sizeof(t_block);
-        range->block_count--;
-        merge_prev_blocks(range, block->prev);
+        heap->block_count--;
+        merge_prev_blocks(heap, block->prev);
     }
 }
 
-static void merge_next_blocks(t_range *range, t_block *block)
+static void merge_next_blocks(t_heap *heap, t_block *block)
 {
-    if (range && block && block->next && block->next->freed) {
+    if (heap && block && block->next && block->next->freed) {
         block->next = block->next->next;
         if (block->next && block->next->next) {
             block->next->next->prev	= block;
             block->data_size		+= block->next->data_size +
                                            sizeof(t_block);
         }
-        range->block_count--;
-        merge_next_blocks(range, block->next);
+        heap->block_count--;
+        merge_next_blocks(heap, block->next);
     }
 }
 
-void merge_near_freed_blocks(t_range *range, t_block *block)
+void merge_near_freed_blocks(t_heap *heap, t_block *block)
 {
-    merge_next_blocks(range, block);
-    merge_prev_blocks(range, block);
+    merge_next_blocks(heap, block);
+    merge_prev_blocks(heap, block);
 }
 
-void remove_if_last_block(t_range *range, t_block *block)
+void remove_if_last_block(t_heap *heap, t_block *block)
 {
     if (block->freed && !block->next) {
         if (block->prev)
             block->prev->next = NULL;
-        range->free_size += block->data_size + sizeof(t_block);
-        range->block_count--;
+        heap->free_size += block->data_size + sizeof(t_block);
+        heap->block_count--;
     }
 }
 
-void unmap_if_empty(t_range *range)
+void unmap_if_empty(t_heap *heap)
 {
-    t_range	*static_range	= get_default_range();
+    t_heap	*static_heap	= get_default_heap();
     bool	is_last		= FALSE;
     size_t	unmap_size	= 0;
 
-    if (range->block_count)
+    if (heap->block_count)
         return;
 
-    if (range->prev)
-        range->prev->next = range->next;
+    if (heap->prev)
+        heap->prev->next = heap->next;
 
-    if (range->next)
-        range->next->prev = range->prev;
+    if (heap->next)
+        heap->next->prev = heap->prev;
 
-    if ((range == static_range) || (!range->next && !range->prev)) {
-        if (!range->block_count)
+    if ((heap == static_heap) || (!heap->next && !heap->prev)) {
+        if (!heap->block_count)
             is_last = TRUE;
-        unmap_size = range->total_size;
-        set_default_range(range->next);
+        unmap_size = heap->total_size;
+        set_default_heap(heap->next);
     }
     if (is_last)
-        munmap(range, unmap_size);
+        munmap(heap, unmap_size);
 }
 
 void free(void *ptr)
 {
-    t_range	*range	= get_default_range();
+    t_heap	*heap	= get_default_heap();
     t_block	*block	= NULL;
-    if (!ptr || !range)
+    if (!ptr || !heap)
         return;
 
-    convert_ptr(&range, &block, range, ptr);
+    convert_ptr(&heap, &block, heap, ptr);
 
-    if (block && range) {
+    if (block && heap) {
         block->freed = TRUE;
-        merge_near_freed_blocks(range, block);
-        remove_if_last_block(range, block);
-        unmap_if_empty(range);
+        merge_near_freed_blocks(heap, block);
+        remove_if_last_block(heap, block);
+        unmap_if_empty(heap);
     }
 }

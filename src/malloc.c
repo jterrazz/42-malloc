@@ -12,25 +12,25 @@
 
 #include "malloc.h"
 
-static t_block*find_freed_block(size_t size, t_range **found_range)
+static t_block*find_freed_block(size_t size, t_heap **found_heap)
 {
-    t_range		*range;
+    t_heap		*heap;
     t_block		*block;
-    t_range_group	group;
+    t_heap_group	group;
 
-	range = get_default_range();
-	group = get_range_group_from_block_size(size);
+	heap = get_default_heap();
+	group = get_heap_group_from_block_size(size);
 
-    while (range) {
-        block = (t_block *)SHIFT_RANGE(range);
-        while (block && range->group == group) {
+    while (heap) {
+        block = (t_block *)SHIFT_HEAP(heap);
+        while (block && heap->group == group) {
             if (block->freed && (block->data_size >= size + sizeof(t_block))) {
-                *found_range = range;
+                *found_heap = heap;
                 return (block);
             }
             block = block->next;
         }
-        range = range->next;
+        heap = heap->next;
     }
     return (NULL);
 }
@@ -38,11 +38,11 @@ static t_block*find_freed_block(size_t size, t_range **found_range)
 static t_block*fill_freed_block(size_t size)
 {
     t_block	*freed_block	= NULL;
-    t_range	*freed_range	= NULL;
+    t_heap	*freed_heap	= NULL;
 
-    freed_block = find_freed_block(size, &freed_range);
-    if (freed_block && freed_range) {
-        reinit_freed_block(freed_block, size, freed_range);
+    freed_block = find_freed_block(size, &freed_heap);
+    if (freed_block && freed_heap) {
+        reinit_freed_block(freed_block, size, freed_heap);
         return (freed_block);
     }
 
@@ -51,7 +51,7 @@ static t_block*fill_freed_block(size_t size)
 
 void*malloc(size_t size)
 {
-	t_range *range;
+	t_heap *heap;
     t_block *block;
 
     if (!size)
@@ -60,8 +60,8 @@ void*malloc(size_t size)
     if ((block = fill_freed_block(size)) != NULL)
         return (SHIFT_BLOCK(block));
 
-    if (!(range = get_range_of_block_size((const size_t)size)))
+    if (!(heap = get_heap_of_block_size((const size_t)size)))
         return (NULL);
 
-    return (append_empty_block(range, size));
+    return (append_empty_block(heap, size));
 }

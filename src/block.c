@@ -27,7 +27,7 @@ static void init_empty_block(t_block *block, size_t size) {
 	block->freed = FALSE;
 }
 
-void reinit_freed_block(t_block *block, size_t size, t_range *range) {
+void reinit_freed_block(t_block *block, size_t size, t_heap *heap) {
 	t_block *freed_block = (t_block *) (SHIFT_BLOCK(block) + size);
 
 	init_empty_block(freed_block, block->data_size - size - sizeof(t_block));
@@ -37,27 +37,27 @@ void reinit_freed_block(t_block *block, size_t size, t_range *range) {
 	freed_block->prev = block;
 	freed_block->next = block->next;
 	block->next = freed_block;
-	range->block_count++;
-	range->free_size -= size;
+	heap->block_count++;
+	heap->free_size -= size;
 }
 
-void *append_empty_block(t_range *range, size_t size) {
-	t_block *new_block = (t_block *)SHIFT_RANGE(range);
+void *append_empty_block(t_heap *heap, size_t size) {
+	t_block *new_block = (t_block *)SHIFT_HEAP(heap);
 	t_block *last_block = NULL;
 
-	if (range->block_count) {
+	if (heap->block_count) {
 		last_block = get_last_block_item(new_block);
 		new_block =
 			(t_block *)(SHIFT_BLOCK(last_block) +
 			            last_block->data_size);
 	}
 	init_empty_block(new_block, size);
-	if (range->block_count) {
+	if (heap->block_count) {
 		last_block->next = new_block;
 		new_block->prev = last_block;
 	}
-	range->block_count++;
-	range->free_size =
-		range->free_size - new_block->data_size - sizeof(t_block);
+	heap->block_count++;
+	heap->free_size =
+		heap->free_size - new_block->data_size - sizeof(t_block);
 	return (void *) SHIFT_BLOCK(new_block);
 }

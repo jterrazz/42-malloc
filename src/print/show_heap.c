@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   range_default.c                                    :+:      :+:    :+:   */
+/*   show_heap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 19:06:00 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/22 21:54:53 by jterrazz         ###   ########.fr       */
+/*   Created: 2019/05/04 01:57:33 by jterrazz          #+#    #+#             */
+/*   Updated: 2019/05/30 18:14:21 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_range**default_range(void)
-{
-    static t_range *default_range = NULL;
-
-    return (&default_range);
-}
-
-t_range*get_default_range(void)
-{
-    return (*default_range());
-}
-
-void set_default_range(t_range *range)
-{
-    *default_range() = range;
+void print_heap_group(t_heap *heap) {
+	if (heap->group == TINY) {
+		ft_putstr("TINY");
+	} else if (heap->group == SMALL) {
+		ft_putstr("SMALL");
+	} else {
+		ft_putstr("LARGE");
+	}
 }

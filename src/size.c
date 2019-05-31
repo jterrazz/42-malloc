@@ -13,7 +13,7 @@
 #include "malloc.h"
 #include <unistd.h>
 
-t_range_group get_range_group_from_block_size(size_t size)
+t_heap_group get_heap_group_from_block_size(size_t size)
 {
     if (size <= (size_t) TINY_BLOCK_SIZE)
         return (TINY);
@@ -23,14 +23,14 @@ t_range_group get_range_group_from_block_size(size_t size)
     return (LARGE);
 }
 
-size_t get_range_size_from_block_size(size_t size)
+size_t get_heap_size_from_block_size(size_t size)
 {
-    t_range_group range_group = get_range_group_from_block_size(size);
+    t_heap_group heap_group = get_heap_group_from_block_size(size);
 
-    if (range_group == TINY)
-        return ((size_t) TINY_RANGE_ALLOCATION_SIZE);
-    else if (range_group == SMALL)
-        return ((size_t) SMALL_RANGE_ALLOCATION_SIZE);
+    if (heap_group == TINY)
+        return ((size_t) TINY_HEAP_ALLOCATION_SIZE);
+    else if (heap_group == SMALL)
+        return ((size_t) SMALL_HEAP_ALLOCATION_SIZE);
 
-    return (size + sizeof(t_range) + sizeof(t_block));
+    return (size + sizeof(t_heap) + sizeof(t_block));
 }

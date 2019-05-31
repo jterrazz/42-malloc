@@ -8,7 +8,7 @@
 void run_test_malloc(void);
 void run_test_realloc(void);
 void run_test_mixed(void);
-void show_range_list();
+void show_heap_list();
 void run_test_rlimit();
 
 #endif

@@ -41,36 +41,36 @@ static size_t print_block_list(t_block *block)
     return (total);
 }
 
-static void print_range_header(char *name, t_range *range)
+static void print_heap_header(char *name, t_heap *heap)
 {
     ft_putstr(name);
     ft_putstr(" : ");
-    ft_itoa_base((size_t)range, 16, 9, TRUE);
+    ft_itoa_base((size_t)heap, 16, 9, TRUE);
     ft_putstr("\n");
 }
 
 void show_alloc_mem()
 {
-    t_range	*first_range;
-    t_range	*last_range;
+    t_heap	*first_heap;
+    t_heap	*last_heap;
     size_t	total;
 
     total	= 0;
-    first_range = get_default_range();
-    last_range	= get_last_range(first_range);
+    first_heap = get_default_heap();
+    last_heap	= get_last_heap(first_heap);
 
-    while (last_range) {
-        if (last_range->group == TINY) {
-            print_range_header("TINY", last_range);
-        } else if (last_range->group == SMALL) {
-            print_range_header("SMALL", last_range);
+    while (last_heap) {
+        if (last_heap->group == TINY) {
+            print_heap_header("TINY", last_heap);
+        } else if (last_heap->group == SMALL) {
+            print_heap_header("SMALL", last_heap);
         } else {
-            print_range_header("LARGE", last_range);
+            print_heap_header("LARGE", last_heap);
         }
 
-        if (last_range->block_count)
-            total += print_block_list((t_block *)SHIFT_RANGE(last_range));
-        last_range = last_range->prev;
+        if (last_heap->block_count)
+            total += print_block_list((t_block *)SHIFT_HEAP(last_heap));
+        last_heap = last_heap->prev;
     }
 
     ft_putstr("Total : ");

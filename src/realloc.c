@@ -14,7 +14,7 @@
 
 void*realloc(void *ptr, size_t size)
 {
-    t_range	*range;
+    t_heap	*heap;
     t_block	*block;
     void	*new_ptr;
     size_t	data_size;
@@ -24,9 +24,9 @@ void*realloc(void *ptr, size_t size)
     if (!size)
         return (ptr);
 
-    range = get_default_range();
-    convert_ptr(&range, &block, range, ptr);
-    if (!range || !block)
+    heap = get_default_heap();
+    convert_ptr(&heap, &block, heap, ptr);
+    if (!heap || !block)
         return (malloc(size));
 
     if (size == block->data_size)

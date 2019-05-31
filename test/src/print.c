@@ -13,25 +13,25 @@
 #include <stdio.h>
 #include "./test.h"
 
-void show_range_list()
+void show_heap_list()
 {
     int i = 0;
-    t_range *range = get_default_range();
+    t_heap *heap = get_default_heap();
 
-    printf("DEBUG: Range list\n");
+    printf("DEBUG: heap list\n");
 
-    while (range) {
+    while (heap) {
         printf(
-            "%d. Range %p, prev: %p, next: %p (count: %zu, group: %d, total size: %zu, free_space: %zu)\n",
+            "%d. heap %p, prev: %p, next: %p (count: %zu, group: %d, total size: %zu, free_space: %zu)\n",
             i,
-            range,
-            range->prev,
-            range->next,
-            range->block_count,
-            range->group,
-            range->total_size,
-            range->free_size);
-        range = range->next;
+            heap,
+            heap->prev,
+            heap->next,
+            heap->block_count,
+            heap->group,
+            heap->total_size,
+            heap->free_size);
+        heap = heap->next;
         i++;
     }
 }

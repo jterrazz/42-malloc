@@ -23,8 +23,8 @@ PATH_LIB = lib
 PATH_OBJ = obj
 PATH_SRC = src
 
-SOURCES += block.c range_default.c range.c size.c
-SOURCES += print/show_alloc_mem_ex.c print/show_alloc_mem.c print/show_range.c
+SOURCES += block.c heap_default.c heap.c size.c
+SOURCES += print/show_alloc_mem_ex.c print/show_alloc_mem.c print/show_heap.c
 SOURCES += utils/ft_itoa_base.c utils/ft_bzero.c utils/ft_putstr.c \
 	utils/ft_memcpy.c utils/ft_memmove.c
 SOURCES += calloc.c free.c malloc.c realloc.c

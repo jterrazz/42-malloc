@@ -21,13 +21,13 @@ You can type this command and it will always return the same value for your syst
 getconf PAGE_SIZE
 ```
 ```
-#define TINY_RANGE_ALLOCATION_SIZE (4 * getpagesize())
-#define TINY_BLOCK_SIZE (TINY_RANGE_ALLOCATION_SIZE / 128)
-#define SMALL_RANGE_ALLOCATION_SIZE (16 * getpagesize())
-#define SMALL_BLOCK_SIZE (SMALL_RANGE_ALLOCATION_SIZE / 128)
+#define TINY_HEAP_ALLOCATION_SIZE (4 * getpagesize())
+#define TINY_BLOCK_SIZE (TINY_HEAP_ALLOCATION_SIZE / 128)
+#define SMALL_HEAP_ALLOCATION_SIZE (16 * getpagesize())
+#define SMALL_BLOCK_SIZE (SMALL_HEAP_ALLOCATION_SIZE / 128)
 ```
 
-Range size header: 48
+heap size header: 48
 Block size header: 32
 For example, if getpagesize returns 4096,
 We get a 1st header of 48 bytes, then 32 + block_size ...
@@ -43,8 +43,8 @@ export DYLD_INSERT_LIBRARIES=libft_malloc.so
 export DYLD_FORCE_FLAT_NAMESPACE=1
 ```
 
-Range divided in blocks
-A range is a mapped zone
+heap divided in blocks
+A heap is a mapped zone
 Metadatas are stocked on the mapped memory so we move
 
 

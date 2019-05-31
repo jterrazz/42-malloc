@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 18:47:16 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/31 20:10:51 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/06/01 00:36:48 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static void test_malloc_free_size()
 {
     void *t = malloc(SMALL_BLOCK_SIZE + 1);
 
-    // Range should have 0 free_space
-    // show_range_list();
+    // heap should have 0 free_space
+    // show_heap_list();
 
     free(t);
 }
@@ -78,5 +78,5 @@ void run_test_malloc(void)
     test_malloc_free_size();
 
     // show_alloc_mem();
-    // show_range_list();
+    // show_heap_list();
 }

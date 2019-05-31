@@ -6,20 +6,20 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 14:17:15 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/06/01 00:33:31 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/06/01 00:34:57 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-static void print_range_description(t_range *range) {
-	print_range_group(range);
+static void print_heap_description(t_heap *heap) {
+	print_heap_group(heap);
 	ft_putstr(" - ");
-	ft_itoa_base((size_t) range, 16, 0, TRUE);
+	ft_itoa_base((size_t) heap, 16, 0, TRUE);
 	ft_putstr("\n");
 }
 
-static void print_range_hex_line(char *start) {
+static void print_heap_hex_line(char *start) {
 	ft_itoa_base((size_t) start, 16, 0, TRUE);
 	unsigned int i = 0;
 
@@ -31,22 +31,22 @@ static void print_range_hex_line(char *start) {
 	ft_putstr("\n");
 }
 
-static void show_range_hex_dump(t_range *range) {
-	print_range_description(range);
+static void show_heap_hex_dump(t_heap *heap) {
+	print_heap_description(heap);
 	size_t i = 0;
-	char *ptr = (char *) range;
+	char *ptr = (char *) heap;
 
-	while (i < range->total_size) {
-		print_range_hex_line(ptr + i);
+	while (i < heap->total_size) {
+		print_heap_hex_line(ptr + i);
 		i += 16;
 	}
 }
 
 void show_alloc_meme_ex(void) {
-	t_range *range = get_default_range();
+	t_heap *heap = get_default_heap();
 
-	while (range) {
-		show_range_hex_dump(range);
-		range = range->next;
+	while (heap) {
+		show_heap_hex_dump(heap);
+		heap = heap->next;
 	}
 }

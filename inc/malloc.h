@@ -6,38 +6,38 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/31 19:27:24 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/06/01 00:38:01 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 #define MALLOC_H
 
-#define SHIFT_RANGE(start) ((char *)start + sizeof(t_range))
+#define SHIFT_HEAP(start) ((char *)start + sizeof(t_heap))
 #define SHIFT_BLOCK(start) ((char *)start + sizeof(t_block))
 
-#define TINY_RANGE_ALLOCATION_SIZE (4 * getpagesize())
-#define TINY_BLOCK_SIZE (TINY_RANGE_ALLOCATION_SIZE / 128)
-#define SMALL_RANGE_ALLOCATION_SIZE (16 * getpagesize())
-#define SMALL_BLOCK_SIZE (SMALL_RANGE_ALLOCATION_SIZE / 128)
+#define TINY_HEAP_ALLOCATION_SIZE (4 * getpagesize())
+#define TINY_BLOCK_SIZE (TINY_HEAP_ALLOCATION_SIZE / 128)
+#define SMALL_HEAP_ALLOCATION_SIZE (16 * getpagesize())
+#define SMALL_BLOCK_SIZE (SMALL_HEAP_ALLOCATION_SIZE / 128)
 
 #include <stdlib.h>
 
 typedef enum { FALSE, TRUE }				bool;
-typedef enum e_range_group { TINY, SMALL, LARGE }	t_range_group;
+typedef enum e_heap_group { TINY, SMALL, LARGE }	t_heap_group;
 
 /*
-** A range stores data about one mapped zone (we are calling mmap)
+** A heap stores data about one mapped zone
 */
 
-typedef struct s_range {
-    struct s_range	*prev;
-    struct s_range	*next;
-    t_range_group	group;
+typedef struct s_heap {
+    struct s_heap	*prev;
+    struct s_heap	*next;
+    t_heap_group	group;
     size_t		total_size;
     size_t		free_size;
     size_t		block_count;
-} t_range;
+} t_heap;
 
 /*
 ** A block stores data for each malloc call
@@ -65,20 +65,20 @@ void	show_alloc_meme_ex(void);
 ** Internal prototypes
 */
 
-t_range		*get_default_range(void);
-t_range		*get_last_range(t_range *range);
-t_range		*get_range_of_block_size(const size_t size);
-void		set_default_range(t_range *range);
-t_range_group	get_range_group_from_block_size(size_t size);
-size_t		get_range_size_from_block_size(size_t size);
-void		print_range_group(t_range *range);
+t_heap		*get_default_heap(void);
+t_heap		*get_last_heap(t_heap *heap);
+t_heap		*get_heap_of_block_size(const size_t size);
+void		set_default_heap(t_heap *heap);
+t_heap_group	get_heap_group_from_block_size(size_t size);
+size_t		get_heap_size_from_block_size(size_t size);
+void		print_heap_group(t_heap *heap);
 
-void	*append_empty_block(t_range *range, size_t size);
-void	reinit_freed_block(t_block *block, size_t size, t_range *range);
+void	*append_empty_block(t_heap *heap, size_t size);
+void	reinit_freed_block(t_block *block, size_t size, t_heap *heap);
 
-void convert_ptr(t_range **found_range,
+void convert_ptr(t_heap **found_heap,
     t_block **found_block,
-    t_range *range,
+    t_heap *heap,
     void *ptr);
 
 /*
