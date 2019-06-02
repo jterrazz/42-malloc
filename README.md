@@ -87,6 +87,7 @@ This means realloc(ptr,0) may not really free/deallocate the memory, and thus it
 ``` bash
 make && sh ./run_test.sh
 ```
+take tests from malloc git folder
 
 #include <sys/mman.h>
 For mmap and munmap
