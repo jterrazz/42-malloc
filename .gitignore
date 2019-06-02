@@ -3,3 +3,4 @@ obj/
 a.out
 *.gch
 *.so
+.DS_Store
