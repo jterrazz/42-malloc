@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/31 20:56:25 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/06/03 12:52:20 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void unmap_if_empty(t_heap *heap)
 {
     t_heap	*static_heap	= get_default_heap();
     bool	is_last		= FALSE;
-    size_t	unmap_size	= 0;
 
     if (heap->block_count)
         return;
@@ -94,11 +93,10 @@ void unmap_if_empty(t_heap *heap)
     if ((heap == static_heap) || (!heap->next && !heap->prev)) {
         if (!heap->block_count)
             is_last = TRUE;
-        unmap_size = heap->total_size;
         set_default_heap(heap->next);
     }
     if (is_last)
-        munmap(heap, unmap_size);
+        munmap(heap, heap->total_size);
 }
 
 void free(void *ptr)
