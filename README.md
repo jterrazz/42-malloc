@@ -48,7 +48,7 @@ To understand in detail this implementation, [**please refer to the medium artic
 - Block defragmentation of freed space
 - Multi-thread safe with pthread
 - Show hex dump of the allocated zones with `show_alloc_mem_ex()`
-- Debug environment variables: MallocStackLogging
+- Debug environment variables: MallocStackLogging, MyMallocScribble
 
 ### Structure
 

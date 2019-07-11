@@ -6,7 +6,7 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/07/11 18:29:38 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/07/11 19:15:13 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ PATH_SRC = src
 SOURCES += block.c heap_default.c heap.c size.c global.c logs/stack_logs.c
 SOURCES += print/show_alloc_mem_ex.c print/show_alloc_mem.c print/show_heap.c
 SOURCES += utils/ft_itoa_base.c utils/ft_bzero.c utils/ft_putstr.c \
-	utils/ft_memcpy.c utils/ft_memmove.c
+	utils/ft_memcpy.c utils/ft_memmove.c utils/ft_memset.c
 SOURCES += calloc.c free.c malloc.c realloc.c
 
 OBJECTS = $(SOURCES:%.c=$(PATH_OBJ)/%.o)

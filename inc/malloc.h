@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 18:52:59 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 19:14:03 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_itoa_base(size_t nb, char base, char length, bool prefix);
 void    ft_itoa_fd(size_t nb, char base, int fd, bool prefix);
 size_t  ft_strlen(const char *s);
+void	*ft_memset(void *b, int c, size_t len);
 
 #endif

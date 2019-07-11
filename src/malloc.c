@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 19:03:59 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 19:21:27 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ void*malloc(size_t size)
 
     pthread_mutex_lock(&g_ft_malloc_mutex);
     ret = ft_malloc(size);
-    if (ret)
+    if (ret) {
         log_stack(ALLOCATE, (size_t) ret, size);
+        if (getenv("MyMallocScribble")) ft_memset(ret, 0xaa, size);
+    }
     pthread_mutex_unlock(&g_ft_malloc_mutex);
+
     return ret;
 }

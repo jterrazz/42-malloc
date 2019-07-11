@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 19:05:23 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 19:20:17 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void ft_free(void *ptr)
 
     if (block && heap) {
         block->freed = TRUE;
+        if (getenv("MyMallocScribble")) ft_memset(ptr, 0x55, block->data_size);
         merge_near_freed_blocks(heap, block);
         remove_if_last_block(heap, block);
         unmap_if_empty(heap);

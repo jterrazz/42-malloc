@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 17:56:30 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 19:08:34 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 19:14:43 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include <stdio.h> // rem
 static void log_allocation(int fd, size_t arg1, size_t arg2)
 {
 	ft_itoa_fd(arg1, 10, fd, TRUE);
