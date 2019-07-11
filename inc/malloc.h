@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 16:00:14 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 18:52:59 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 
 extern pthread_mutex_t		g_ft_malloc_mutex;
 
-typedef enum { FALSE, TRUE }				bool;
+typedef enum e_bool { FALSE, TRUE }				bool;
 typedef enum e_heap_group { TINY, SMALL, LARGE }	t_heap_group;
-
+typedef enum e_memory_event { ALLOCATE, DEALLOCATE } t_memory_event;
 /*
 ** A heap stores data about one mapped zone
 */
@@ -85,6 +85,8 @@ void convert_ptr(t_heap **found_heap,
     t_heap *heap,
     void *ptr);
 
+void log_stack(t_memory_event event, size_t arg1, size_t arg2);
+
 /*
 ** Utils prototypes
 */
@@ -94,5 +96,7 @@ void	ft_putstr(char const *s);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_itoa_base(size_t nb, char base, char length, bool prefix);
+void    ft_itoa_fd(size_t nb, char base, int fd, bool prefix);
+size_t  ft_strlen(const char *s);
 
 #endif

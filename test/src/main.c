@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 11:28:38 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 15:54:00 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 18:38:22 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "./test.h"
 
 static void *run_test_thread() {
-	printf("Debut du thread\n");
+	// printf("Debut du thread\n");
 	void *ret = malloc(80);
-	printf("Fin du thread\n");
+	// printf("Fin du thread\n");
 	pthread_exit(NULL);
 	return ret;
 }

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 15:16:34 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 19:05:23 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,13 @@ void unmap_if_empty(t_heap *heap)
         munmap(heap, heap->total_size);
 }
 
-void free(void *ptr)
+void ft_free(void *ptr)
 {
-    pthread_mutex_lock(&g_ft_malloc_mutex);
 
     t_heap	*heap	= get_default_heap();
     t_block	*block	= NULL;
-    if (!ptr || !heap) {
-        pthread_mutex_unlock(&g_ft_malloc_mutex);
+    if (!ptr || !heap)
         return;
-    }
-
     convert_ptr(&heap, &block, heap, ptr);
 
     if (block && heap) {
@@ -118,6 +114,12 @@ void free(void *ptr)
         remove_if_last_block(heap, block);
         unmap_if_empty(heap);
     }
+}
 
+void free(void *ptr)
+{
+    pthread_mutex_lock(&g_ft_malloc_mutex);
+    log_stack(DEALLOCATE, (size_t) ptr, 0);
+    ft_free(ptr);
     pthread_mutex_unlock(&g_ft_malloc_mutex);
 }

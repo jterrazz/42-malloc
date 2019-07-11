@@ -6,12 +6,27 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 15:31:32 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/31 19:27:10 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 18:26:14 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "malloc.h"
+
+void    ft_itoa_fd(size_t nb, char base, int fd, bool prefix)
+{
+	char    *str;
+
+	str = "0123456789ABCDEFGHIJKLMNOPQRSTUIVWXYZ";
+	if (nb / base != 0)
+		ft_itoa_fd(nb / base, base, fd, prefix);
+	else {
+		if (prefix)
+			write(fd, "0x", 2);
+	}
+	write(fd, &str[nb % base], 1);
+}
+
 
 void    ft_itoa_base(size_t nb, char base, char length, bool prefix)
 {
@@ -28,5 +43,4 @@ void    ft_itoa_base(size_t nb, char base, char length, bool prefix)
 		}
 	}
 	write(1, &str[nb % base], 1);
-	return;
 }
