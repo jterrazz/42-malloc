@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:06:42 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/31 20:54:33 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 15:14:11 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void show_alloc_mem()
     t_heap	*last_heap;
     size_t	total;
 
+    pthread_mutex_lock(&g_ft_malloc_mutex);
+
     total	= 0;
     first_heap = get_default_heap();
     last_heap	= get_last_heap(first_heap);
@@ -76,4 +78,6 @@ void show_alloc_mem()
     ft_putstr("Total : ");
     ft_itoa_base(total, 10, 0, FALSE);
     ft_putstr(" octets\n");
+
+    pthread_mutex_unlock(&g_ft_malloc_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/06/01 00:38:01 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 15:10:38 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 #define SMALL_BLOCK_SIZE (SMALL_HEAP_ALLOCATION_SIZE / 128)
 
 #include <stdlib.h>
+#include <pthread.h>
+
+pthread_mutex_t		g_ft_malloc_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 typedef enum { FALSE, TRUE }				bool;
 typedef enum e_heap_group { TINY, SMALL, LARGE }	t_heap_group;

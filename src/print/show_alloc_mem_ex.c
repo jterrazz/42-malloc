@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 14:17:15 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/06/01 00:34:57 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 15:13:19 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,14 @@ static void show_heap_hex_dump(t_heap *heap) {
 }
 
 void show_alloc_meme_ex(void) {
+	pthread_mutex_lock(&g_ft_malloc_mutex);
+
 	t_heap *heap = get_default_heap();
 
 	while (heap) {
 		show_heap_hex_dump(heap);
 		heap = heap->next;
 	}
+
+	pthread_mutex_unlock(&g_ft_malloc_mutex);
 }
