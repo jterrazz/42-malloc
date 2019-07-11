@@ -11,6 +11,7 @@ void *malloc(size_t size);
 void free(void *ptr);
 void *realloc(void *ptr, size_t size);
 void *calloc(size_t count, size_t size);
+void *reallocf(void *ptr, size_t size);
 
 // Printing functions
 
@@ -42,6 +43,12 @@ make && sh ./run_test.sh
 ## Implementation
 
 To understand in detail this implementation, [**please refer to the medium article**](https://medium.com/a-42-journey/how-to-create-your-own-malloc-library-b86fedd39b96) of this project.
+
+- Safe memory function calloc and reallocf
+- Block defragmentation of freed space
+- Multi-thread safe with pthread
+- Show hex dump of the allocated zones with `show_alloc_mem_ex()`
+- Debug environment variables: ...
 
 ### Structure
 
