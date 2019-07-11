@@ -6,11 +6,13 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 15:18:59 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 15:31:48 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+
+pthread_mutex_t g_ft_malloc_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 static t_block*find_freed_block(size_t size, t_heap **found_heap)
 {
@@ -59,11 +61,15 @@ void*malloc(size_t size)
 
     pthread_mutex_lock(&g_ft_malloc_mutex);
 
-    if ((block = fill_freed_block(size)) != NULL)
+    if ((block = fill_freed_block(size)) != NULL) {
+        pthread_mutex_unlock(&g_ft_malloc_mutex);
         return (SHIFT_BLOCK(block));
+    }
 
-    if (!(heap = get_heap_of_block_size((const size_t)size)))
+    if (!(heap = get_heap_of_block_size((const size_t)size))) {
+        pthread_mutex_unlock(&g_ft_malloc_mutex);
         return (NULL);
+    }
 
     void *ret = append_empty_block(heap, size);
     pthread_mutex_unlock(&g_ft_malloc_mutex);

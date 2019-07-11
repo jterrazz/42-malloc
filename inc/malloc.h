@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 15:10:38 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 15:28:52 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-pthread_mutex_t		g_ft_malloc_mutex = PTHREAD_MUTEX_INITIALIZER;
+extern pthread_mutex_t		g_ft_malloc_mutex;
 
 typedef enum { FALSE, TRUE }				bool;
 typedef enum e_heap_group { TINY, SMALL, LARGE }	t_heap_group;
