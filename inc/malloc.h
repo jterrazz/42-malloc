@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 15:28:52 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/11 16:00:14 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_block {
 
 void	*malloc(size_t size);
 void	*calloc(size_t count, size_t size);
+void    *reallocf(void *ptr, size_t size);
 void	*realloc(void *ptr, size_t size);
 void	free(void *ptr);
 void	show_alloc_mem();
