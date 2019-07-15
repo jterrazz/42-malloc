@@ -44,11 +44,12 @@ make && sh ./run_test.sh
 
 To understand in detail this implementation, [**please refer to the medium article**](https://medium.com/a-42-journey/how-to-create-your-own-malloc-library-b86fedd39b96) of this project.
 
-- Safe memory function calloc and reallocf
-- Block defragmentation of freed space
+Bonus:
+- Calloc and reallocf
+- Freed space is defragmented
 - Multi-thread safe with pthread
 - Show hex dump of the allocated zones with `show_alloc_mem_ex()`
-- Debug environment variables: MallocStackLogging, MyMallocScribble
+- Debug environment variables: MyMallocStackLogging, MyMallocScribble
 
 ### Structure
 
