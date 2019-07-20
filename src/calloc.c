@@ -6,32 +6,28 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:42:17 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 23:36:04 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 23:41:06 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <stdio.h> //rem
 
-//just that
-// if (!num || !nsize)
-// 		return (NULL);
-// 	size = num * nsize;
-// 	if (nsize != size / num)
-// 		return (NULL);
+/*
+    Calloc returns a memory zone set to zero
+    Returns null for count = 0, size = 0 or if overflow of their multiplication
+*/
 
 void *start_calloc(size_t count, size_t size)
 {
-    size_t malloc_size;
+    size_t total_size;
 	void *res;
 
-    malloc_size = size * count;
-    if ((count != 0) && (malloc_size / count != size))
+    total_size = size * count;
+    if (!count || !size || (total_size / count != size))
         return (NULL);
 
-    if ((res = start_malloc(malloc_size))) {
-        ft_bzero(res, malloc_size);
-    }
+    if ((res = start_malloc(total_size)))
+        ft_bzero(res, total_size);
 
     return (res);
 }

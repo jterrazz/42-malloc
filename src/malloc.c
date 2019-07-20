@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 23:32:36 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 23:43:29 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ static t_block*find_freed_block(size_t size, t_heap **found_heap)
     return (NULL);
 }
 
+/* Explain malloc here */
+
 void *start_malloc(size_t size)
 {
     t_heap *heap;
@@ -103,7 +105,6 @@ void *start_malloc(size_t size)
 
         // Maybe delete 2 * sizeof...
     size = (size + 15) & ~15; //tmp // Should print this size print in show_mem_alloc ? //Put in medium and macro for the calcccc of modulo :))))))))
-    // size = (2 * sizeof(size_t) + (size + 15)) & ~15; //tmp // Should print this size print in show_mem_alloc ? //Put in medium and macro for the calcccc of modulo :))))))))
 
     log_call(MALLOC);
 
