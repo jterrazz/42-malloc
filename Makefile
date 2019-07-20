@@ -6,7 +6,7 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/07/20 10:12:06 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/07/20 15:35:42 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SOURCES += block.c heap_default.c heap.c size.c global.c
 SOURCES += log/show_alloc_mem_ex.c log/show_alloc_mem.c log/show_heap.c \
 	log/logs.c
 SOURCES += libc/ft_itoa_base.c libc/ft_bzero.c libc/ft_putstr.c \
-	libc/ft_memcpy.c libc/ft_memmove.c libc/ft_memset.c
+	libc/ft_memcpy.c libc/ft_memmove.c libc/ft_memset.c libc/ft_putstr_fd.c libc/ft_putchar_fd.c
 SOURCES += calloc.c free.c malloc.c realloc.c
 
 OBJECTS = $(SOURCES:%.c=$(PATH_OBJ)/%.o)

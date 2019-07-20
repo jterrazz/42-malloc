@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:54:01 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 15:21:13 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 22:37:56 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ void *append_empty_block(t_heap *heap, size_t size) {
 	t_block *new_block = (t_block *)SHIFT_HEAP(heap);
 	t_block *last_block = NULL;
 
+	// ft_putstr("yolo0\n");
 	if (heap->block_count) {
 		last_block = get_last_block_item(new_block);
-		new_block =
-			(t_block *)(SHIFT_BLOCK(last_block) +
-			            last_block->data_size);
+		new_block = (t_block *)(SHIFT_BLOCK(last_block) + last_block->data_size);
 	}
+	// ft_putstr("yolo1\n");
 	init_empty_block(new_block, size);
+	// ft_putstr("yolo2\n");
 	if (heap->block_count) {
 		last_block->next = new_block;
 		new_block->prev = last_block;

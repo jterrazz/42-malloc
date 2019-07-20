@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/12 13:41:21 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 15:34:45 by jterrazz         ###   ########.fr       */
+/*   Created: 2017/04/12 13:40:40 by jterrazz          #+#    #+#             */
+/*   Updated: 2019/07/20 15:35:19 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include <unistd.h>
 
-void	ft_putstr_fd(char const *s, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
-	int i;
-
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
+	write(fd, &c, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:42:17 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 15:20:45 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 22:57:16 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void*calloc(size_t count, size_t size)
     size_t malloc_size;
 	void *ptr;
 
-    // ft_putstr("Calloc/n");
     // show_alloc_mem();
 
     pthread_mutex_lock(&g_ft_malloc_mutex);
+    // ft_putstr("Calloc/n");
     log_call(CALLOC);
 
     malloc_size = size * count;
@@ -39,8 +39,12 @@ void*calloc(size_t count, size_t size)
 
     pthread_mutex_unlock(&g_ft_malloc_mutex);
 
-    if ((ptr = malloc(malloc_size)))
+    if ((ptr = malloc(malloc_size))) {
+        // tmp
+        pthread_mutex_lock(&g_ft_malloc_mutex);
         ft_bzero(ptr, malloc_size);
+        pthread_mutex_unlock(&g_ft_malloc_mutex);
+    }
 
     return (ptr);
 }

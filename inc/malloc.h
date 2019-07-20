@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 12:05:32 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:14:34 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ SMALL     TINY LARGE
 #include <stdlib.h>
 #include <pthread.h>
 #include <stdio.h> // rem
+#include <fcntl.h>
+#include <unistd.h>
 
 //tmp
 extern pthread_mutex_t		g_ft_malloc_mutex;
@@ -111,6 +113,7 @@ void convert_ptr(t_heap **found_heap,
 void log_stack(t_memory_event event, size_t arg1, size_t arg2);
 void log_call(t_call_event event);
 
+void debug_heap_block() ; //tmp
 /*
 ** Utils methods
 */
@@ -124,5 +127,6 @@ void    ft_itoa_fd(size_t nb, char base, int fd, bool prefix);
 size_t  ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_putstr_fd(char const *s, int fd);
+void	ft_putchar_fd(char c, int fd);
 
 #endif

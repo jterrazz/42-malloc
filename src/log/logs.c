@@ -6,13 +6,11 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 17:56:30 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 15:21:53 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:00:44 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <fcntl.h>
-#include <unistd.h>
 
 /*
 getenv problem
