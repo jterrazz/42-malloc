@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 23:34:14 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 23:59:52 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void		print_heap_group(t_heap *heap);
 
 void	*append_empty_block(t_heap *heap, size_t size);
 void	reinit_freed_block(t_block *block, size_t size, t_heap *heap);
+void init_block(t_block *block, size_t size);
 
 void convert_ptr(t_heap **found_heap,
     t_block **found_block,
@@ -115,6 +116,7 @@ void convert_ptr(t_heap **found_heap,
 
 void log_stack(t_memory_event event, size_t arg1, size_t arg2);
 void log_call(t_call_event event);
+t_block*fill_freed_block(size_t size);
 
 void debug_heap_block() ; //tmp
 /*

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 23:48:35 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 23:52:04 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,19 @@
 void *start_malloc(size_t size)
 {
     t_heap *heap;
-    // t_block *block;
-
-    if (!size)
-        return (NULL);
-
-    size = (size + 15) & ~15; // Should print this size print in show_mem_alloc ? //Put in medium and macro for the calcccc of modulo :))))))))
+    t_block *block;
 
     log_call(MALLOC);
 
-    // put back
-    // if ((block = fill_freed_block(size)) != NULL) {
-    // // if ((block = fill_freed_block(size)) != NULL) {
-    //     // ft_putstr("Malloc used an already created block\n");
-    //     return (SHIFT_BLOCK(block));
-    // }
+    if (!size)
+        return (NULL);
+    size = (size + 15) & ~15; // Should print this size print in show_mem_alloc ? //Put in medium and macro for the calcccc of modulo :))))))))
 
+    if ((block = fill_freed_block(size)))
+        return (SHIFT_BLOCK(block));
     if (!(heap = get_heap_of_block_size((const size_t)size)))
         return (NULL);
+
     return (append_empty_block(heap, size));
 }
 
