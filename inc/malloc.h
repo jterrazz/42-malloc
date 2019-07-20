@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 19:14:34 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 23:34:14 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ typedef struct s_block {
 
 void	*malloc(size_t size);
 void	*calloc(size_t count, size_t size);
-void    *reallocf(void *ptr, size_t size);
 void	*realloc(void *ptr, size_t size);
+void    *reallocf(void *ptr, size_t size);
 void	free(void *ptr);
 void	show_alloc_mem();
 void	show_alloc_meme_ex(void);
@@ -94,6 +94,9 @@ void	show_alloc_meme_ex(void);
 ** Internal methods
 */
 
+void	*start_malloc(size_t size);
+void	start_free(void *ptr);
+void	*start_realloc(void *ptr, size_t size);
 t_heap		*get_default_heap(void);
 t_heap		*get_last_heap(t_heap *heap);
 t_heap		*get_heap_of_block_size(const size_t size);

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:42:17 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 22:57:16 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 23:36:04 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,30 @@
 // 	if (nsize != size / num)
 // 		return (NULL);
 
-void*calloc(size_t count, size_t size)
+void *start_calloc(size_t count, size_t size)
 {
     size_t malloc_size;
-	void *ptr;
-
-    // show_alloc_mem();
-
-    pthread_mutex_lock(&g_ft_malloc_mutex);
-    // ft_putstr("Calloc/n");
-    log_call(CALLOC);
+	void *res;
 
     malloc_size = size * count;
-    if ((count != 0) && (malloc_size / count != size)) { //wtf
-        pthread_mutex_unlock(&g_ft_malloc_mutex);
+    if ((count != 0) && (malloc_size / count != size))
         return (NULL);
+
+    if ((res = start_malloc(malloc_size))) {
+        ft_bzero(res, malloc_size);
     }
 
+    return (res);
+}
+
+void*calloc(size_t count, size_t size)
+{
+    void *res;
+
+    pthread_mutex_lock(&g_ft_malloc_mutex);
+    log_call(CALLOC);
+    res = start_calloc(count, size);
     pthread_mutex_unlock(&g_ft_malloc_mutex);
 
-    if ((ptr = malloc(malloc_size))) {
-        // tmp
-        pthread_mutex_lock(&g_ft_malloc_mutex);
-        ft_bzero(ptr, malloc_size);
-        pthread_mutex_unlock(&g_ft_malloc_mutex);
-    }
-
-    return (ptr);
+    return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 23:06:24 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 23:32:36 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,31 +133,14 @@ void *start_malloc(size_t size)
 // Put in debug bonus
 void *malloc(size_t size)
 {
-	void *ret;
-
-    // show_alloc_mem();
-
-
-    // if (size == ((37 + 15) & ~15)) {
-    //     show_alloc_mem();
-    // //     int fd;
-    // //     if ((fd = open(LOGS_PATH, O_CREAT | O_WRONLY | O_APPEND, 0644)) == -1)
-    // //         return NULL;
-    // //     ft_putstr_fd("\n\nHello\n\n", fd);
-    // //     close(fd);
-    // }
-
+	void *res;
 
     pthread_mutex_lock(&g_ft_malloc_mutex);
-    // ft_putstr("Malloc\n");
-    ret = start_malloc(size);
-    // debug_heap_block();
-    if (ret) {
-        log_stack(ALLOCATE, (size_t) ret, size); // Use modulo here if applicate
-        // if (getenv("MyMallocScribble")) ft_memset(ret, 0xaa, size);
+    if ((res = start_malloc(size))) {
+        log_stack(ALLOCATE, (size_t) res, size); // Use modulo here if applicate
+        // if (getenv("MyMallocScribble")) ft_memset(res, 0xaa, size);
     }
-    // ft_putstr("End malloc\n");
-
     pthread_mutex_unlock(&g_ft_malloc_mutex);
-    return ret;
+
+    return (res);
 }

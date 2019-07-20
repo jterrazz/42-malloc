@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 23:06:22 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 23:33:26 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ static t_block *merge_prev_blocks(t_heap *heap, t_block *block)
             block->next->prev = block->prev;
         block->prev->data_size += block->data_size + sizeof(t_block);
         heap->block_count--;
-        // merge_prev_blocks(heap, block->prev);
         return block->prev;
     }
     return NULL;
@@ -109,7 +108,6 @@ static void merge_next_blocks(t_heap *heap, t_block *block)
         }
         block->next = block->next->next;
         heap->block_count--;
-        // merge_next_blocks(heap, block->next);
     }
 }
 
@@ -195,18 +193,13 @@ void unmap_if_empty(t_heap *heap)
     }
 }
 
+// Log mmap and munmap too
+
 void free(void *ptr)
 {
-    // show_alloc_mem();
     pthread_mutex_lock(&g_ft_malloc_mutex);
-    // ft_putstr("Free\n");
     log_call(FREE);
-    log_stack(DEALLOCATE, (size_t) ptr, 0);
-    // ft_putstr("a0");
     start_free(ptr);
-    // debug_heap_block();
-    // ft_putstr("End of free");
-    // ft_putstr("End of free\n");
+    log_stack(DEALLOCATE, (size_t) ptr, 0);
     pthread_mutex_unlock(&g_ft_malloc_mutex);
-    // ft_putstr("Real end of free");
 }
