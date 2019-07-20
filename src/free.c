@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 19:20:17 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 08:26:12 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void ft_free(void *ptr)
 
     t_heap	*heap	= get_default_heap();
     t_block	*block	= NULL;
+
+    log_call(FREE);
     if (!ptr || !heap)
         return;
     convert_ptr(&heap, &block, heap, ptr);
@@ -119,8 +121,10 @@ void ft_free(void *ptr)
 
 void free(void *ptr)
 {
+    // ft_putstr("Start function free\n");
     pthread_mutex_lock(&g_ft_malloc_mutex);
     log_stack(DEALLOCATE, (size_t) ptr, 0);
-    ft_free(ptr);
+    // ft_free(ptr);
     pthread_mutex_unlock(&g_ft_malloc_mutex);
+    // ft_putstr("End function\n");
 }

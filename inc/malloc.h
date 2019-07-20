@@ -6,12 +6,16 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 19:14:03 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 06:59:15 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 #define MALLOC_H
+
+// medium: getting more memory from the kernel
+// learn what is the kernel vs sys
+// rename to bucket or heap cell
 
 #define SHIFT_HEAP(start) ((char *)start + sizeof(t_heap))
 #define SHIFT_BLOCK(start) ((char *)start + sizeof(t_block))
@@ -20,18 +24,27 @@
 #define TINY_BLOCK_SIZE (TINY_HEAP_ALLOCATION_SIZE / 128)
 #define SMALL_HEAP_ALLOCATION_SIZE (16 * getpagesize())
 #define SMALL_BLOCK_SIZE (SMALL_HEAP_ALLOCATION_SIZE / 128)
+// typically > 512 bytes for large
+//renam to max
 
 #include <stdlib.h>
 #include <pthread.h>
+#include <stdio.h> // rem
 
+//tmp
 extern pthread_mutex_t		g_ft_malloc_mutex;
 
 typedef enum e_bool { FALSE, TRUE }				bool;
+typedef enum e_bool_bef { B_NULL, B_FALSE, B_TRUE }				bool_bef;
 typedef enum e_heap_group { TINY, SMALL, LARGE }	t_heap_group;
 typedef enum e_memory_event { ALLOCATE, DEALLOCATE } t_memory_event;
+typedef enum e_call_event { MALLOC, CALLOC, FREE, REALLOC, REALLOCF } t_call_event;
+
 /*
 ** A heap stores data about one mapped zone
 */
+
+extern bool_bef LoggingOn;
 
 typedef struct s_heap {
     struct s_heap	*prev;
@@ -54,7 +67,7 @@ typedef struct s_block {
 } t_block;
 
 /*
-** Malloc prototypes
+** Library methods
 */
 
 void	*malloc(size_t size);
@@ -66,7 +79,7 @@ void	show_alloc_mem();
 void	show_alloc_meme_ex(void);
 
 /*
-** Internal prototypes
+** Internal methods
 */
 
 t_heap		*get_default_heap(void);
@@ -86,9 +99,10 @@ void convert_ptr(t_heap **found_heap,
     void *ptr);
 
 void log_stack(t_memory_event event, size_t arg1, size_t arg2);
+void log_call(t_call_event event);
 
 /*
-** Utils prototypes
+** Utils methods
 */
 
 void	ft_bzero(void *s, size_t n);

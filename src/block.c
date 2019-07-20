@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:54:01 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/22 21:36:57 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/17 21:42:14 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void reinit_freed_block(t_block *block, size_t size, t_heap *heap) {
 	t_block *freed_block = (t_block *) (SHIFT_BLOCK(block) + size);
 
 	init_empty_block(freed_block, block->data_size - size - sizeof(t_block));
+	// init_empty_block(freed_block, block->data_size - size - sizeof(t_block));
 	freed_block->freed = TRUE;
 	block->freed = FALSE;
 	block->data_size = size;

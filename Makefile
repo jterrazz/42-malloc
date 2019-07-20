@@ -6,7 +6,7 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/07/11 19:15:13 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/07/20 06:14:45 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ LIB_NAME = libft_malloc.so
 CC = gcc
 
 FLAGS_CC = -Wall -Wextra -Werror
-FLAGS_LIB = -shared -fPIC
+FLAGS_LIB = -shared
 
 # **************************************************************************** #
 # COMMANDS  		    													   #
@@ -59,7 +59,7 @@ $(NAME): $(OBJECTS)
 
 $(PATH_OBJ)/%.o: $(PATH_SRC)/%.c
 	@mkdir -p $(@D)
-	$(CC) -fPIC -c -o $@ $(FLAGS_CC) $^ -O0 -g -I $(PATH_INC)
+	$(CC) -fPIC -c -o $@ $(FLAGS_CC) $^ -O0 -g -I $(PATH_INC) # find why fpic
 
 clean:
 	@rm -rf $(PATH_OBJ)

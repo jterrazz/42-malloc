@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/11 19:21:27 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 07:40:00 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,23 @@ void *ft_malloc(size_t size)
     t_heap *heap;
     t_block *block;
 
+    // ft_putstr("Here0\n");
+
     if (!size)
         return (NULL);
+    // if (size < 200)
+        // return ft_malloc(size + 1);
 
+    // if (size < 16) // Explain why
+    //     return ft_malloc(16); // Bad use 16
+
+    // ft_putstr("Here1\n");
+    // log_call(MALLOC);
+    // ft_putstr("Here2\n");
     if ((block = fill_freed_block(size)) != NULL) {
         return (SHIFT_BLOCK(block));
     }
+    // ft_putstr("Here3\n");
 
     if (!(heap = get_heap_of_block_size((const size_t)size))) {
         return (NULL);
@@ -69,17 +80,24 @@ void *ft_malloc(size_t size)
     return (ret);
 }
 
-void*malloc(size_t size)
+void *malloc(size_t size)
 {
+    // ft_putstr("Start function malloc\n");
 	void *ret;
 
     pthread_mutex_lock(&g_ft_malloc_mutex);
     ret = ft_malloc(size);
+    // ft_putstr("Malloc end 1\n");
     if (ret) {
-        log_stack(ALLOCATE, (size_t) ret, size);
-        if (getenv("MyMallocScribble")) ft_memset(ret, 0xaa, size);
+        // ft_putstr("Malloc end 2\n");
+        // log_stack(ALLOCATE, (size_t) ret, size);
+        // ft_putstr("Malloc end 3\n");
+        // if (getenv("MyMallocScribble")) ft_memset(ret, 0xaa, size);
+        // ft_putstr("Malloc end 4\n");
     }
     pthread_mutex_unlock(&g_ft_malloc_mutex);
+    // ft_putstr("Malloc end 5\n");
 
+    // ft_putstr("End function\n");
     return ret;
 }
