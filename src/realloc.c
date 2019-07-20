@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 07:39:42 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/20 15:20:42 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 void*realloc(void *ptr, size_t size)
 {
-    // ft_putstr("Start function realloc\n");
     t_heap	*heap;
     t_block	*block;
     void	*new_ptr;
     size_t	data_size;
 
-    // if (size < 100)
-    //     return realloc(ptr, 1000); //tmp
-
+    // ft_putstr("Realloc/n");
+    // show_alloc_mem();
     pthread_mutex_lock(&g_ft_malloc_mutex);
 
     log_call(REALLOC);
@@ -54,6 +52,5 @@ void*realloc(void *ptr, size_t size)
     ft_memmove(new_ptr, ptr, data_size);
     free(ptr);
 
-    // ft_putstr("End function\n");
     return (new_ptr);
 }
