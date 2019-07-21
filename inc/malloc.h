@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:17:59 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:31:49 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,17 @@
 #define LOGS_PATH "/tmp/malloc.log"
 
 /*
-================
-0                   512
-SMALL     TINY LARGE
+** For a pagesize of 4096 bytes
+**
+** TINY  - cell < 128 bytes  - region 16 KB
+** SMALL - cell < 1024 bytes - region 128 KB
+** LARGE - cell > 1024 bytes
 */
 
 #define TINY_HEAP_ALLOCATION_SIZE (4 * getpagesize())
 #define TINY_BLOCK_SIZE (TINY_HEAP_ALLOCATION_SIZE / 128)
 #define SMALL_HEAP_ALLOCATION_SIZE (32 * getpagesize())
 #define SMALL_BLOCK_SIZE (SMALL_HEAP_ALLOCATION_SIZE / 128)
-
-// typically > 512 bytes for large
-//renam to max
 
 #include <fcntl.h>
 #include <pthread.h>
