@@ -17,7 +17,7 @@
 static  void fill_free_block(t_block *block, size_t size, t_heap *heap) {
 	t_block *free_block = BLOCK_SHIFT(block) + size;
 
-	init_block(free_block, block->next - free_block);
+	setup_block(free_block, block->next - free_block);
 	free_block->freed = TRUE;
 	free_block->prev = block;
 	free_block->next = block->next;

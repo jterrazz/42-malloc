@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 11:17:47 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 11:23:10 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	show_alloc_meme_ex(void);
 ** Internal methods
 */
 
+t_block *get_last_block(t_block *block);
 void	*start_malloc(size_t size);
 void	start_free(void *ptr);
 void	*start_realloc(void *ptr, size_t size);
@@ -108,7 +109,7 @@ void		print_heap_group(t_heap *heap);
 
 void	*append_empty_block(t_heap *heap, size_t size);
 void	reinit_freed_block(t_block *block, size_t size, t_heap *heap);
-void init_block(t_block *block, size_t size);
+void setup_block(t_block *block, size_t size);
 void delete_heap_if_empty(t_heap *heap);
 
 t_block *merge_block(t_heap *heap, t_block *block);
