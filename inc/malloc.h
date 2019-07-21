@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:33:40 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:34:08 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,6 @@ void	log_stack(t_stack_event event, size_t size);
 void	log_detail(t_detail_event event);
 t_block *try_filling_available_block(size_t size);
 t_bool	getenv_cached(t_env env);
-
-void debug_heap_block();        //tmp
 
 /*
 ** Utils methods
