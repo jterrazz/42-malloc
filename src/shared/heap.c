@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 13:00:58 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:23:10 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_heap *create_heap(t_heap_group group, size_t block_size)
     heap->total_size	= heap_size;
     heap->free_size	= heap_size - sizeof(t_heap);
 
+	log_detail(HEAP_CREATE);
+
     return (heap);
 }
 
@@ -93,5 +95,6 @@ void delete_heap_if_empty(t_heap *heap)
 		if (heap == static_heap)
 			set_default_heap(heap->next);
         munmap(heap, heap->total_size);
+		log_detail(HEAP_DELETE);
     }
 }

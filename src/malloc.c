@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 11:03:30 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:19:17 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void *start_malloc(size_t size)
 {
     t_heap *heap;
     t_block *block;
-
-    log_call(MALLOC);
+    void *res;
 
     if (!size)
         return (NULL);
@@ -39,7 +38,9 @@ void *start_malloc(size_t size)
     if (!(heap = get_heap_of_block_size((const size_t)size)))
         return (NULL);
 
-    return (append_empty_block(heap, size));
+    res = append_empty_block(heap, size);
+    log_stack(ALLOCATE, (size_t) res, size); // Use modulo here if ????? // Check all show_alloc_mem and other use the asked size (change in realloc, fill ptr etc)
+    return (res);
 }
 
 // Put in debug bonus
@@ -48,8 +49,8 @@ void *malloc(size_t size)
 	void *res;
 
     pthread_mutex_lock(&g_ft_malloc_mutex);
+    log_detail(MALLOC);
     if ((res = start_malloc(size))) {
-        log_stack(ALLOCATE, (size_t) res, size); // Use modulo here if applicate // Check all show_alloc_mem and other use the asked size (change in realloc, fill ptr etc)
         if (getenv_cached(ENV_SCRIBBLE)) ft_memset(res, 0xaa, size);
     }
     pthread_mutex_unlock(&g_ft_malloc_mutex);

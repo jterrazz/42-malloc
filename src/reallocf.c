@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:57:54 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 10:51:31 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:24:35 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void *reallocf(void *ptr, size_t size)
 	void *res;
 
 	pthread_mutex_lock(&g_ft_malloc_mutex);
-	log_call(REALLOCF);
+	log_detail(REALLOCF);
 	res = start_reallocf(ptr, size);
 	pthread_mutex_unlock(&g_ft_malloc_mutex);
 

@@ -47,7 +47,7 @@ void *realloc(void *ptr, size_t size)
     void *res;
 
     pthread_mutex_lock(&g_ft_malloc_mutex);
-    log_call(REALLOC);
+    log_detail(REALLOC);
     res = start_realloc(ptr, size);
     pthread_mutex_unlock(&g_ft_malloc_mutex);
 

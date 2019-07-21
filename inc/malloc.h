@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:01:32 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:22:42 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ extern pthread_mutex_t		g_ft_malloc_mutex;
 typedef enum e_t_bool { FALSE, TRUE }				t_bool;
 typedef enum e_t_bool_bef { B_NULL = 0, B_FALSE, B_TRUE }				t_t_bool_bef;
 typedef enum e_heap_group { TINY, SMALL, LARGE }	t_heap_group;
-typedef enum e_memory_event { ALLOCATE, DEALLOCATE } t_memory_event;
-typedef enum e_call_event { MALLOC, CALLOC, FREE, REALLOC, REALLOCF } t_call_event;
-
+typedef enum e_stack_event { ALLOCATE, DEALLOCATE } t_stack_event;
+typedef enum e_detail_event { MALLOC, CALLOC, FREE, REALLOC, REALLOCF, HEAP_CREATE, HEAP_DELETE } t_detail_event;
 typedef enum e_env { ENV_STACK_LOGGING = 1<<0, ENV_FULL_LOGGING = 1<<1, ENV_SCRIBBLE = 1<<2 } t_env;
 
 /*
@@ -124,8 +123,8 @@ void search_ptr(t_heap **found_heap,
     t_heap *heap,
     void *ptr);
 
-void log_stack(t_memory_event event, size_t arg1, size_t arg2);
-void log_call(t_call_event event);
+void log_stack(t_stack_event event, size_t arg1, size_t arg2);
+void log_detail(t_detail_event event);
 t_block*try_filling_available_block(size_t size);
 t_bool getenv_cached(t_env env);
 
