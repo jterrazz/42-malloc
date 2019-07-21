@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:02:51 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:03:40 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ t_heap *create_heap(t_heap_group group, size_t block_size)
     return (heap);
 }
 
-// Exept large
 static t_bool is_last_of_preallocated(t_heap *heap)
 {
 	t_heap	*static_heap	= g_heap_anchor;
@@ -91,7 +90,7 @@ void delete_heap_if_empty(t_heap *heap)
     if (heap->next)
         heap->next->prev = heap->prev;
 
-    if (!is_last_of_preallocated(heap)) { // Don't delete if last preallocated
+    if (!is_last_of_preallocated(heap)) {
 		if (heap == static_heap)
 			g_heap_anchor = heap->next;
         munmap(heap, heap->total_size);

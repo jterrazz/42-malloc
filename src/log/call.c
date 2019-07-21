@@ -6,30 +6,28 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 17:56:30 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:24:19 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:06:08 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 // Check addresses are logged fully (No length ??? in ftitoa ????)
-static void log_allocation(int fd, size_t arg1, size_t arg2)
+static void log_allocation(int fd, size_t size)
 {
-	ft_itoa_fd(arg1, 10, fd, TRUE); // Address so 16 ???
 	ft_putstr_fd(" allocated ", fd);
-	ft_itoa_fd(arg2, 10, fd, FALSE);
+	ft_itoa_fd(size, 10, fd, FALSE);
 	ft_putstr_fd(" bytes\n", fd);
 }
 
-static void log_deallocation(int fd, size_t arg1, size_t arg2)
+static void log_deallocation(int fd, size_t size)
 {
-	ft_itoa_fd(arg1, 10, fd, TRUE); // Address so 16 ???
-	ft_putstr_fd(" released \n", fd);
-	ft_itoa_fd(arg2, 10, fd, TRUE);
+	ft_putstr_fd("Released \n", fd);
+	ft_itoa_fd(size, 10, fd, TRUE);
 	ft_putstr_fd(" bytes\n", fd);
 }
 
-void log_stack(t_stack_event event, size_t arg1, size_t arg2)
+void log_stack(t_stack_event event, size_t size)
 {
 	int fd;
 
@@ -37,9 +35,9 @@ void log_stack(t_stack_event event, size_t arg1, size_t arg2)
 		if ((fd = open(LOGS_PATH, O_CREAT | O_WRONLY | O_APPEND, 0644)) == -1)
 			return;
 		if (event == ALLOCATE)
-			log_allocation(fd, arg1, arg2);
+			log_allocation(fd, size);
 		else
-			log_deallocation(fd, arg1, arg2);
+			log_deallocation(fd, size);
 		close(fd);
 	}
 }

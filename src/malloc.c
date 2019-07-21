@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:58:35 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:06:05 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void *start_malloc(size_t size)
         return (NULL);
 
     res = append_empty_block(heap, size);
-    log_stack(ALLOCATE, (size_t) res, size);
+    log_stack(ALLOCATE, size);
     return (res);
 }
 
