@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 08:59:30 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 09:48:56 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ SMALL     TINY LARGE
 //renam to max
 
 #include <stdlib.h>
+#include <sys/mman.h>
 #include <pthread.h>
-#include <stdio.h> // rem
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -117,8 +117,10 @@ void convert_ptr(t_heap **found_heap,
 void log_stack(t_memory_event event, size_t arg1, size_t arg2);
 void log_call(t_call_event event);
 t_block*fill_freed_block(size_t size);
+bool getenv_cached(t_env env);
 
 void debug_heap_block() ; //tmp
+
 /*
 ** Utils methods
 */

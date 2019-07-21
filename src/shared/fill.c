@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 23:47:26 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 09:38:55 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 09:40:33 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ static t_block*find_free_block(size_t size, t_heap **found_heap)
                 *found_heap = heap;
 				return (block);
             }
-
             block = block->next;
         }
-
         heap = heap->next;
     }
     return (NULL);

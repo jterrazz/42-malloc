@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   logs.c                                             :+:      :+:    :+:   */
+/*   call.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 17:56:30 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 19:00:44 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 09:45:41 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,7 @@ static void log_deallocation(int fd, size_t arg1)
 }
 
 // TODO rename run.sh
-// TODO rename to libc
-
-// Better system
-bool getenv_cached(t_env env)
-{
-	static bool_bef StackLogging = B_NULL;
-	static bool_bef FullLogging = B_NULL;
-	static bool_bef Scribble = B_NULL;
-
-	return FALSE;
-	if (env == ENV_STACK_LOGGING)
-		return (StackLogging = StackLogging || !!getenv("MyMallocStackLogging") ? B_TRUE : B_FALSE) == B_TRUE; // Not working apparently tes t all separate
-	else if (env == ENV_FULL_LOGGING)
-		return (FullLogging = FullLogging || !!getenv("MyMallocFullLogging") ? B_TRUE : B_FALSE) == B_TRUE;
-	else if (env == ENV_SCRIBLE)
-		return (Scribble = Scribble || !!getenv("MyMallocScribble") ? B_TRUE : B_FALSE) == B_TRUE;
-	return (FALSE);
-}
+// TODO rename to libc + awesome
 
 // Do a common function for both
 void log_call(t_call_event event)

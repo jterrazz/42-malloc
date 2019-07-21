@@ -6,45 +6,11 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 08:54:20 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 09:48:41 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <sys/mman.h>
-
-void debug_heap_block()
-{
-    t_heap		*heap;
-    t_block		*block;
-
-    heap = get_default_heap();
-
-    ft_putstr("\n\nHEAP STATUS\n"); //tmp
-    while (heap) {
-        block = (t_block *)SHIFT_HEAP(heap);
-
-        ft_putstr("Heap: "); //tmp
-        ft_itoa_base((size_t)heap, 16, 9, TRUE);
-        ft_putstr(" - group: "); //tmp
-        ft_itoa_base(heap->group, 10, 0, FALSE);
-        ft_putstr(" - next: "); //tmp
-        ft_itoa_base((size_t)heap->next, 16, 9, TRUE);
-        ft_putstr("\n"); //tmp
-
-        while (block) {
-            ft_putstr("Block: "); //tmp
-            ft_itoa_base((size_t)block, 16, 9, TRUE);
-            ft_putstr(" - next: "); //tmp
-            ft_itoa_base((size_t)block->next, 16, 9, TRUE);
-            ft_putstr("\n"); //tmp
-
-            block = block->next;
-        }
-        ft_putstr("Finished status\n");
-        heap = heap->next;
-    }
-}
 
 // rename to find state
 void convert_ptr(t_heap **found_heap,
@@ -54,32 +20,16 @@ void convert_ptr(t_heap **found_heap,
 {
     t_block *block = NULL;
 
-    // ft_putstr("hm0");
     while (heap) {
         block = (t_block *)SHIFT_HEAP(heap);
         while (block) {
-            // ft_putstr("hm1");
-            // if ((void *)block > (void *) heap + heap->total_size) // should not be needed
-            //     return;
             if (SHIFT_BLOCK(block) == ptr) {
                 *found_heap	= heap;
                 *found_block	= block;
-                // ft_putstr("hm2");
                 return;
             }
 
-
-            // ft_putstr("EL heap: "); //tmp
-            // ft_itoa_base((size_t)heap, 16, 9, TRUE);
-            // ft_putstr(" - block: "); //tmp
-            // ft_itoa_base((size_t)block, 16, 9, TRUE);
-            // ft_putstr(" - next block: "); //tmp
-            // ft_itoa_base((size_t)block->next, 16, 9, TRUE);
-            // ft_putstr("\n"); //tmp
-
-
             block = block->next;
-            // ft_putstr("hm3");
         }
         heap = heap->next;
     }
@@ -123,9 +73,6 @@ void remove_if_last_block(t_heap *heap, t_block *block)
         if (block->prev) {
             block->prev->next = NULL;
         }
-        // block->data_size = 0;
-        // block->prev = NULL;
-        // block->next = NULL;
         heap->free_size += block->data_size + sizeof(t_block);
         heap->block_count--;
     }
@@ -154,6 +101,7 @@ void unmap_if_empty(t_heap *heap)
 
     t_heap	*heap	= get_default_heap();
     t_block	*block	= NULL;
+    t_block *ret;
 
     if (!ptr || !heap)
         return;
@@ -162,9 +110,11 @@ void unmap_if_empty(t_heap *heap)
     if (block && heap) {
         block->freed = TRUE;
 
-        t_block *ret = merge_near_freed_blocks(heap, block);
-        block = ret ? ret : block;
+        if (getenv_cached(ENV_SCRIBLE))
+            ft_memset(ptr, 0x55, block->data_size);
 
+        ret = merge_near_freed_blocks(heap, block);
+        block = ret ? ret : block;
         remove_if_last_block(heap, block);
         unmap_if_empty(heap);
     }
@@ -176,8 +126,6 @@ void free(void *ptr)
     pthread_mutex_lock(&g_ft_malloc_mutex);
     log_call(FREE);
     start_free(ptr);
-    // if (ptr)
-    // if (getenv("MyMallocScribble")) ft_memset(ptr, 0x55, block->data_size);
     log_stack(DEALLOCATE, (size_t) ptr, 0);
     pthread_mutex_unlock(&g_ft_malloc_mutex);
 }
