@@ -6,15 +6,13 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 23:47:26 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 09:40:33 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 11:37:10 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-// Add description on top of main functions + add this in the todo file
 
-// Is never at the end, always between
-static  void fill_free_block(t_block *block, size_t size, t_heap *heap) {
+static  void divide_block(t_block *block, size_t size, t_heap *heap) {
 	t_block *free_block = BLOCK_SHIFT(block) + size;
 
 	setup_block(free_block, block->next - free_block);
@@ -27,38 +25,18 @@ static  void fill_free_block(t_block *block, size_t size, t_heap *heap) {
 	block->freed = FALSE;
 }
 
-static t_block*find_free_block(size_t size, t_heap **found_heap)
+/*
+** Returns NULL if no block was available
+*/
+t_block *try_filling_available_block(size_t size)
 {
-    t_heap		*heap;
-    t_block		*block;
-    t_heap_group	group;
+    t_block	*block;
+    t_heap	*heap;
 
-	heap = get_default_heap();
-	group = get_heap_group_from_block_size(size);
+    find_available_block(size, &heap, &block);
 
-    while (heap) {
-        block = (t_block *)HEAP_SHIFT(heap);
-
-        while (heap->group == group && block) {
-            if (block->freed && (block->data_size >= size + sizeof(t_block))) {
-                *found_heap = heap;
-				return (block);
-            }
-            block = block->next;
-        }
-        heap = heap->next;
-    }
-    return (NULL);
-}
-
-  t_block*fill_freed_block(size_t size)
-{
-    t_block	*block	= NULL;
-    t_heap	*heap	= NULL;
-
-    block = find_free_block(size, &heap);
     if (block && heap) {
-        fill_free_block(block, size, heap);
+        divide_block(block, size, heap);
         return (block);
     }
 

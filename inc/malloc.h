@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 11:23:10 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 11:37:01 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	show_alloc_meme_ex(void);
 ** Internal methods
 */
 
+void find_available_block(size_t size, t_heap **res_heap, t_block **res_block);
 t_block *get_last_block(t_block *block);
 void	*start_malloc(size_t size);
 void	start_free(void *ptr);
@@ -125,7 +126,7 @@ void search_ptr(t_heap **found_heap,
 
 void log_stack(t_memory_event event, size_t arg1, size_t arg2);
 void log_call(t_call_event event);
-t_block*fill_freed_block(size_t size);
+t_block*try_filling_available_block(size_t size);
 bool getenv_cached(t_env env);
 
 void debug_heap_block() ; //tmp

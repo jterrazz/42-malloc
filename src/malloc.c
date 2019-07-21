@@ -34,7 +34,7 @@ void *start_malloc(size_t size)
         return (NULL);
     size = (size + 15) & ~15; // Should print this size print in show_mem_alloc ? //Put in medium and macro for the calcccc of modulo :))))))))
 
-    if ((block = fill_freed_block(size)))
+    if ((block = try_filling_available_block(size)))
         return (BLOCK_SHIFT(block));
     if (!(heap = get_heap_of_block_size((const size_t)size)))
         return (NULL);
