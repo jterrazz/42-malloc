@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:54:01 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:10:44 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 16:45:57 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 t_block*get_last_block(t_block *block)
 {
-    while (block->next) {
+    while (block->next)
         block = block->next;
-    }
 
     return (block);
 }

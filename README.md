@@ -1,7 +1,5 @@
 # Malloc
 
-Medium: getting more memory from the kernel
-TODOOO Take from other
 Custom C implementation of the malloc library functions. It creates the shared library `libft_malloc.so` which can be used to replace malloc in any system commands.
 
 [Access the related medium article here](https://medium.com/a-42-journey/how-to-create-your-own-malloc-library-b86fedd39b96)
@@ -15,7 +13,7 @@ void *realloc(void *ptr, size_t size);
 void *calloc(size_t count, size_t size);
 void *reallocf(void *ptr, size_t size);
 
-// Printing functions
+// Debug calls
 
 void show_alloc_mem(); // Print informations about allocated zones
 void show_alloc_mem_ex(); // Print a hex dump of the heaps
@@ -31,12 +29,12 @@ make clean # Clean temporary built files
 make fclean # Clean all built files
 ```
 
-Compile is using gcc -fPIC generates position independent code (PIC) for shared libraries.
+> gcc uses -fPIC to generate position independent code (PIC) for shared libraries.
 
 ### Testing
 
 ```bash
-# Replace malloc in cmds
+# Use malloc with a ${CMD}
 sh insert_lib.sh ${CMD} # ex: sh insert_lib.sh ls
 
 # Run unit test
@@ -49,15 +47,15 @@ make && sh ./run_test.sh
 To understand in detail this implementation, [**please refer to the medium article**](https://medium.com/a-42-journey/how-to-create-your-own-malloc-library-b86fedd39b96) of this project.
 
 Bonus:
-- Calloc and reallocf
-- Freed space is defragmented
+- `calloc()`, `reallocf()`
+- Defragmentation of freed space
 - Multi-thread safe with pthread
-- Show hex dump of the allocated zones with `show_alloc_mem_ex()`
-- Debug environment variables: MyMallocStackLogging, MyMallocScribble
+- Show hex dump of allocated zones with `show_alloc_mem_ex()`
+- Debug environment variables: MyMallocStackLogging, MyMallocScribble, MyMallocFullLogging
 
 ### Structure
 
-The **heap** stores data about one `mmap` zone
+The **heap** stores data about a `mmap` zone
 
 ```c
 typedef struct s_heap {
@@ -70,7 +68,7 @@ typedef struct s_heap {
 } t_heap;
 ```
 
-A **block** stores data for each `malloc` call. They are stored inside the heap.
+A **block** stores data about a `malloc` call.
 
 ```c
 typedef struct s_block {
@@ -88,6 +86,6 @@ For better performance, we preallocate heaps for small malloc calls. We define 3
 ```c
 #define TINY_HEAP_ALLOCATION_SIZE (4 * getpagesize())
 #define TINY_BLOCK_SIZE (TINY_HEAP_ALLOCATION_SIZE / 128)
-#define SMALL_HEAP_ALLOCATION_SIZE (16 * getpagesize())
+#define SMALL_HEAP_ALLOCATION_SIZE (32 * getpagesize())
 #define SMALL_BLOCK_SIZE (SMALL_HEAP_ALLOCATION_SIZE / 128)
 ```
