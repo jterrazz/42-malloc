@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 23:59:52 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 08:59:30 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // learn what is the kernel vs sys
 // rename to bucket or heap cell
 
-#define SHIFT_HEAP(start) ((char *)start + sizeof(t_heap))
-#define SHIFT_BLOCK(start) ((char *)start + sizeof(t_block))
+#define SHIFT_HEAP(start) ((void *)start + sizeof(t_heap))
+#define SHIFT_BLOCK(start) ((void *)start + sizeof(t_block))
 
 #define LOGS_PATH "/tmp/malloc.log"
 

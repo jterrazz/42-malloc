@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 23:52:04 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 08:45:49 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void *start_malloc(size_t size)
 
     if (!size)
         return (NULL);
+        // rm
     size = (size + 15) & ~15; // Should print this size print in show_mem_alloc ? //Put in medium and macro for the calcccc of modulo :))))))))
 
     if ((block = fill_freed_block(size)))

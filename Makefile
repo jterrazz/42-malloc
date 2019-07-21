@@ -6,7 +6,7 @@
 #    By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 18:00:29 by jterrazz          #+#    #+#              #
-#    Updated: 2019/07/20 23:47:42 by jterrazz         ###   ########.fr        #
+#    Updated: 2019/07/21 00:07:02 by jterrazz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ PATH_LIB = lib
 PATH_OBJ = obj
 PATH_SRC = src
 
-SOURCES += shared/block.c shared/heap_default.c shared/heap.c shared/size.c shared/global.c shared/fill.c
+SOURCES += shared/block.c shared/heap_default.c shared/heap.c shared/size.c shared/shared.c shared/fill.c
 SOURCES += log/show_alloc_mem_ex.c log/show_alloc_mem.c log/show_heap.c \
 	log/call.c
 SOURCES += libc/ft_itoa_base.c libc/ft_bzero.c libc/ft_putstr.c \
