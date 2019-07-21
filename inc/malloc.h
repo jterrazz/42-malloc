@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 11:37:01 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:01:32 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ SMALL     TINY LARGE
 
 #define TINY_HEAP_ALLOCATION_SIZE (4 * getpagesize())
 #define TINY_BLOCK_SIZE (TINY_HEAP_ALLOCATION_SIZE / 128)
-#define SMALL_HEAP_ALLOCATION_SIZE (16 * getpagesize())
+#define SMALL_HEAP_ALLOCATION_SIZE (32 * getpagesize())
 #define SMALL_BLOCK_SIZE (SMALL_HEAP_ALLOCATION_SIZE / 128)
 // typically > 512 bytes for large
 //renam to max
@@ -45,8 +45,8 @@ SMALL     TINY LARGE
 //tmp
 extern pthread_mutex_t		g_ft_malloc_mutex;
 
-typedef enum e_bool { FALSE, TRUE }				bool;
-typedef enum e_bool_bef { B_NULL = 0, B_FALSE, B_TRUE }				t_bool_bef;
+typedef enum e_t_bool { FALSE, TRUE }				t_bool;
+typedef enum e_t_bool_bef { B_NULL = 0, B_FALSE, B_TRUE }				t_t_bool_bef;
 typedef enum e_heap_group { TINY, SMALL, LARGE }	t_heap_group;
 typedef enum e_memory_event { ALLOCATE, DEALLOCATE } t_memory_event;
 typedef enum e_call_event { MALLOC, CALLOC, FREE, REALLOC, REALLOCF } t_call_event;
@@ -76,7 +76,7 @@ typedef struct s_block {
     struct s_block	*prev;
     struct s_block	*next;
     size_t		data_size;
-    bool		freed;
+    t_bool		freed;
 } t_block;
 
 /*
@@ -127,7 +127,7 @@ void search_ptr(t_heap **found_heap,
 void log_stack(t_memory_event event, size_t arg1, size_t arg2);
 void log_call(t_call_event event);
 t_block*try_filling_available_block(size_t size);
-bool getenv_cached(t_env env);
+t_bool getenv_cached(t_env env);
 
 void debug_heap_block() ; //tmp
 
@@ -139,8 +139,8 @@ void	ft_bzero(void *s, size_t n);
 void	ft_putstr(char const *s);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	ft_itoa_base(size_t nb, char base, char length, bool prefix);
-void    ft_itoa_fd(size_t nb, char base, int fd, bool prefix);
+void	ft_itoa_base(size_t nb, char base, char length, t_bool prefix);
+void    ft_itoa_fd(size_t nb, char base, int fd, t_bool prefix);
 size_t  ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_putstr_fd(char const *s, int fd);

@@ -73,7 +73,7 @@ typedef struct s_block {
     struct s_block	*prev;
     struct s_block	*next;
     size_t		data_size;
-    bool		freed;
+    t_bool		freed;
 } t_block;
 ```
 

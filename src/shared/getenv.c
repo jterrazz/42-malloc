@@ -6,16 +6,21 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 09:44:13 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 10:07:24 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 13:57:21 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-bool getenv_cached(t_env env)
+/*
+** We cache the environment variables at start
+** https://github.com/xianyi/OpenBLAS/issues/716
+*/
+
+t_bool getenv_cached(t_env env)
 {
 	static uint32_t env_cache;
-	static bool init;
+	static t_bool init;
 
 	if (!init) {
 		if (getenv("MyMallocStackLogging")) env_cache |= ENV_STACK_LOGGING;

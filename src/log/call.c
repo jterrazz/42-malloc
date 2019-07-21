@@ -6,16 +6,11 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 17:56:30 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 09:45:41 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 13:57:31 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
-/*
-getenv problem
-https://github.com/xianyi/OpenBLAS/issues/716
-*/
 
 static void log_allocation(int fd, size_t arg1, size_t arg2)
 {
@@ -36,7 +31,6 @@ static void log_deallocation(int fd, size_t arg1)
 	write(fd, "\n", 1);
 }
 
-// TODO rename run.sh
 // TODO rename to libc + awesome
 
 // Do a common function for both

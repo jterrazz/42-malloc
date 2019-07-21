@@ -6,15 +6,13 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 15:31:32 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 17:52:32 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:01:38 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "malloc.h"
 
-// Check thid  with max
-void    ft_itoa_fd(size_t nb, char base, int fd, bool prefix)
+void    ft_itoa_fd(size_t nb, char base, int fd, t_bool prefix)
 {
 	char    *str;
 
@@ -29,7 +27,7 @@ void    ft_itoa_fd(size_t nb, char base, int fd, bool prefix)
 }
 
 
-void    ft_itoa_base(size_t nb, char base, char length, bool prefix)
+void    ft_itoa_base(size_t nb, char base, char length, t_bool prefix)
 {
 	char    *str;
 
