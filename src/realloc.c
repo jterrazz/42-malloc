@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:51:28 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:15:28 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** the start of the region up to the minimum of the old and new sizes.
 */
 
-void *start_realloc(void *ptr, size_t size)
+void*start_realloc(void *ptr, size_t size)
 {
     t_heap	*heap;
     t_block	*block;
@@ -42,7 +42,7 @@ void *start_realloc(void *ptr, size_t size)
     return (new_ptr);
 }
 
-void *realloc(void *ptr, size_t size)
+void*realloc(void *ptr, size_t size)
 {
     void *res;
 

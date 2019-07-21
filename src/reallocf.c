@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 15:57:54 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:24:35 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:15:31 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@
 ** up to the lesser of the new and old sizes
 */
 
-void *start_reallocf(void *ptr, size_t size)
+void*start_reallocf(void *ptr, size_t size)
 {
-	void *res;
+    void *res;
 
-	res = start_realloc(ptr, size);
-	if (!res && size > 0)
-		start_free(ptr);
+    res = start_realloc(ptr, size);
+    if (!res && (size > 0))
+        start_free(ptr);
 
-	return res;
+    return (res);
 }
 
-void *reallocf(void *ptr, size_t size)
+void*reallocf(void *ptr, size_t size)
 {
-	void *res;
+    void *res;
 
-	pthread_mutex_lock(&g_ft_malloc_mutex);
-	log_detail(REALLOCF);
-	res = start_reallocf(ptr, size);
-	pthread_mutex_unlock(&g_ft_malloc_mutex);
+    pthread_mutex_lock(&g_ft_malloc_mutex);
+    log_detail(REALLOCF);
+    res = start_reallocf(ptr, size);
+    pthread_mutex_unlock(&g_ft_malloc_mutex);
 
-	return (res);
+    return (res);
 }

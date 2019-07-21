@@ -1,17 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shared.c                                           :+:      :+:    :+:   */
+/*   test4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 17:45:23 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:14:58 by jterrazz         ###   ########.fr       */
+/*   Created: 2019/07/21 15:17:04 by jterrazz          #+#    #+#             */
+/*   Updated: 2019/07/21 15:17:05 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "../../inc/malloc.h"
+#include <string.h>
 
-pthread_mutex_t g_ft_malloc_mutex = PTHREAD_MUTEX_INITIALIZER;
+void print(char *s)
+{
+	write(1, s, strlen(s));
+}
 
-t_heap *g_heap_anchor = NULL;
+int main()
+{
+	char *addr;
+
+	addr = malloc(16);
+	free(NULL);
+	free((void *) addr + 5);
+	if (realloc((void *) addr + 5, 10) == NULL)
+		print("Bonjours\n");
+	return (0);
+}

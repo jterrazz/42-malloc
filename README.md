@@ -1,5 +1,7 @@
 # Malloc
-TODOOO Take from other 
+
+Medium: getting more memory from the kernel
+TODOOO Take from other
 Custom C implementation of the malloc library functions. It creates the shared library `libft_malloc.so` which can be used to replace malloc in any system commands.
 
 [Access the related medium article here](https://medium.com/a-42-journey/how-to-create-your-own-malloc-library-b86fedd39b96)
@@ -28,6 +30,8 @@ make
 make clean # Clean temporary built files
 make fclean # Clean all built files
 ```
+
+Compile is using gcc -fPIC generates position independent code (PIC) for shared libraries.
 
 ### Testing
 

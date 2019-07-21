@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:05:57 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:15:17 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 ** or if free(ptr) has already been called before, undefined behavior occurs.
 ** If ptr is NULL, no operation is performed.
 */
-
-// Test not allocated frees
 
 void start_free(void *ptr)
 {
@@ -40,13 +38,12 @@ void start_free(void *ptr)
             ft_memset(ptr, 0x55, block->data_size);
 
         ret	= merge_block(heap, block);
-        block = ret ? ret : block;
+        block	= ret ? ret : block;
         remove_block_if_last(heap, block);
         delete_heap_if_empty(heap);
     }
 }
 
-// Log mmap and munmap too
 void free(void *ptr)
 {
     pthread_mutex_lock(&g_ft_malloc_mutex);

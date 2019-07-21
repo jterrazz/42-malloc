@@ -1,17 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shared.c                                           :+:      :+:    :+:   */
+/*   test5.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 17:45:23 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:14:58 by jterrazz         ###   ########.fr       */
+/*   Created: 2019/07/21 15:17:08 by jterrazz          #+#    #+#             */
+/*   Updated: 2019/07/21 15:17:08 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "../../inc/malloc.h"
 
-pthread_mutex_t g_ft_malloc_mutex = PTHREAD_MUTEX_INITIALIZER;
-
-t_heap *g_heap_anchor = NULL;
+int main()
+{
+	malloc(1024);
+	malloc(1024 * 32);
+	malloc(1024 * 1024);
+	malloc(1024 * 1024 * 16);
+	malloc(1024 * 1024 * 128);
+	show_alloc_mem();
+	return (0);
+}

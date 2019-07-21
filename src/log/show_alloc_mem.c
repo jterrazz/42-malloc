@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 16:06:42 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:37:57 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:10:10 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static size_t print_block_list(t_block *block)
             ft_itoa_base((size_t)end_address, 16, 9, TRUE);
             ft_putstr(" : ");
             ft_itoa_base(block->data_size, 10, 0, FALSE);
-            ft_putstr(" octets\n"); // \n
+            ft_putstr(" octets\n");
             total += block->data_size;
         }
 
@@ -51,31 +51,31 @@ static void print_heap_header(char *name, t_heap *heap)
 
 void start_show_alloc_mem()
 {
-        t_heap	*first_heap;
-        t_heap	*last_heap;
-        size_t	total;
+    t_heap	*first_heap;
+    t_heap	*last_heap;
+    size_t	total;
 
-        total	= 0;
-        first_heap = g_heap_anchor;
-        last_heap	= get_last_heap(first_heap);
+    total	= 0;
+    first_heap	= g_heap_anchor;
+    last_heap	= get_last_heap(first_heap);
 
-        while (last_heap) {
-            if (last_heap->group == TINY) {
-                print_heap_header("TINY", last_heap);
-            } else if (last_heap->group == SMALL) {
-                print_heap_header("SMALL", last_heap);
-            } else {
-                print_heap_header("LARGE", last_heap);
-            }
-
-            if (last_heap->block_count)
-                total += print_block_list((t_block *)HEAP_SHIFT(last_heap));
-            last_heap = last_heap->prev;
+    while (last_heap) {
+        if (last_heap->group == TINY) {
+            print_heap_header("TINY", last_heap);
+        } else if (last_heap->group == SMALL) {
+            print_heap_header("SMALL", last_heap);
+        } else {
+            print_heap_header("LARGE", last_heap);
         }
 
-        ft_putstr("Total : ");
-        ft_itoa_base(total, 10, 0, FALSE);
-        ft_putstr(" octets\n");
+        if (last_heap->block_count)
+            total += print_block_list((t_block *)HEAP_SHIFT(last_heap));
+        last_heap = last_heap->prev;
+    }
+
+    ft_putstr("Total : ");
+    ft_itoa_base(total, 10, 0, FALSE);
+    ft_putstr(" octets\n");
 }
 
 void show_alloc_mem()
