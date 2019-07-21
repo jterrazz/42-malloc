@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:19:17 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:25:37 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void *start_malloc(size_t size)
     return (res);
 }
 
-// Put in debug bonus
 void *malloc(size_t size)
 {
 	void *res;

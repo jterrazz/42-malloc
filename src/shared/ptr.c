@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 11:10:32 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 11:14:12 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:49:53 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@ void search_ptr(t_heap **ptr_heap, t_block **ptr_block, t_heap *heap, void *ptr)
         }
         heap = heap->next;
     }
+    *ptr_heap	= NULL;
+    *ptr_block	= NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 10:52:17 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:51:28 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void *start_realloc(void *ptr, size_t size)
     search_ptr(&heap, &block, heap, ptr);
 
     if (!heap || !block)
-        return (start_malloc(size));
+        return (NULL);
     else if (size == block->data_size)
         return (ptr);
 
