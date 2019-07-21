@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 11:26:02 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 11:37:44 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_heap *create_heap(t_heap_group group, size_t block_size)
     return (heap);
 }
 
-// rename with heap
 void delete_heap_if_empty(t_heap *heap)
 {
     t_heap	*static_heap	= get_default_heap();
