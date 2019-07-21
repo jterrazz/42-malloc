@@ -6,14 +6,12 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:31:49 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:33:40 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 #define MALLOC_H
-
-// rename to bucket or heap cell
 
 #define HEAP_SHIFT(start) ((void *)start + sizeof(t_heap))
 #define BLOCK_SHIFT(start) ((void *)start + sizeof(t_block))
@@ -23,9 +21,9 @@
 /*
 ** For a pagesize of 4096 bytes
 **
-** TINY  - cell < 128 bytes  - region 16 KB
-** SMALL - cell < 1024 bytes - region 128 KB
-** LARGE - cell > 1024 bytes
+** TINY  - block < 128 bytes  - heap 16 KB
+** SMALL - block < 1024 bytes - heap 128 KB
+** LARGE - block > 1024 bytes
 */
 
 #define TINY_HEAP_ALLOCATION_SIZE (4 * getpagesize())
@@ -40,12 +38,9 @@
 #include <sys/resource.h>
 #include <unistd.h>
 
-typedef enum e_t_bool { FALSE,
+typedef enum e_bool { FALSE,
                         TRUE }
                                                         t_bool;
-typedef enum e_t_bool_bef { B_NULL = 0, B_FALSE,
-                            B_TRUE }
-                                                        t_t_bool_bef;
 typedef enum e_heap_group { TINY, SMALL,
                             LARGE }
                                                         t_heap_group;
