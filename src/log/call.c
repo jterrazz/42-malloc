@@ -6,13 +6,12 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 17:56:30 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:06:08 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:06:26 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-// Check addresses are logged fully (No length ??? in ftitoa ????)
 static void log_allocation(int fd, size_t size)
 {
 	ft_putstr_fd(" allocated ", fd);

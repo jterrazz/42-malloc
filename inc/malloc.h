@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:05:46 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:08:09 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	*realloc(void *ptr, size_t size);
 void    *reallocf(void *ptr, size_t size);
 void	free(void *ptr);
 void	show_alloc_mem();
-void	show_alloc_meme_ex(void);
+void	show_alloc_mem_hex(void);
 
 /*
 ** Internal methods
