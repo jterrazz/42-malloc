@@ -29,12 +29,12 @@ void init_block(t_block *block, size_t size)
 }
 
 void *append_empty_block(t_heap *heap, size_t size) {
-	t_block *new_block = (t_block *)SHIFT_HEAP(heap);
+	t_block *new_block = (t_block *)HEAP_SHIFT(heap);
 	t_block *last_block = NULL;
 
 	if (heap->block_count) {
 		last_block = get_last_block_item(new_block);
-		new_block = (t_block *)(SHIFT_BLOCK(last_block) + last_block->data_size);
+		new_block = (t_block *)(BLOCK_SHIFT(last_block) + last_block->data_size);
 	}
 	init_block(new_block, size);
 	if (heap->block_count) {
@@ -43,5 +43,5 @@ void *append_empty_block(t_heap *heap, size_t size) {
 	}
 	heap->block_count++;
 	heap->free_size -= (new_block->data_size + sizeof(t_block));
-	return (void *) SHIFT_BLOCK(new_block);
+	return (void *) BLOCK_SHIFT(new_block);
 }

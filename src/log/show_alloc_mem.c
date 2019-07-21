@@ -23,7 +23,7 @@ static size_t print_block_list(t_block *block, int fd)
     end_address		= NULL;
 
     while (block) {
-        start_address	= (char *)SHIFT_BLOCK(block);
+        start_address	= (char *)BLOCK_SHIFT(block);
         end_address	= start_address + block->data_size;
 
         if (!block->freed) {
@@ -104,7 +104,7 @@ void show_alloc_mem()
         }
 
         if (last_heap->block_count)
-            total += print_block_list((t_block *)SHIFT_HEAP(last_heap), fd);
+            total += print_block_list((t_block *)HEAP_SHIFT(last_heap), fd);
         last_heap = last_heap->prev;
     }
 

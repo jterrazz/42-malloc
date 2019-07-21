@@ -6,15 +6,17 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/21 14:42:17 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/20 23:41:06 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 10:50:39 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 /*
-    Calloc returns a memory zone set to zero
-    Returns null for count = 0, size = 0 or if overflow of their multiplication
+** The calloc() function allocates memory for an array of nmemb elements of size
+** bytes each and returns a pointer to the allocated memory. The memory is set
+** to zero. If nmemb or size is 0, then calloc() returns either NULL, or a
+** unique pointer value that can later be successfully passed to free().
 */
 
 void *start_calloc(size_t count, size_t size)

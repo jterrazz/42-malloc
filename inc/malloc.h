@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 10:05:42 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 11:17:47 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // learn what is the kernel vs sys
 // rename to bucket or heap cell
 
-#define SHIFT_HEAP(start) ((void *)start + sizeof(t_heap))
-#define SHIFT_BLOCK(start) ((void *)start + sizeof(t_block))
+#define HEAP_SHIFT(start) ((void *)start + sizeof(t_heap))
+#define BLOCK_SHIFT(start) ((void *)start + sizeof(t_block))
 
 #define LOGS_PATH "/tmp/malloc.log"
 
@@ -36,10 +36,11 @@ SMALL     TINY LARGE
 //renam to max
 
 #include <stdlib.h>
-#include <sys/mman.h>
 #include <pthread.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/mman.h>
+#include <sys/resource.h>
 
 //tmp
 extern pthread_mutex_t		g_ft_malloc_mutex;
@@ -108,8 +109,15 @@ void		print_heap_group(t_heap *heap);
 void	*append_empty_block(t_heap *heap, size_t size);
 void	reinit_freed_block(t_block *block, size_t size, t_heap *heap);
 void init_block(t_block *block, size_t size);
+void delete_heap_if_empty(t_heap *heap);
 
-void convert_ptr(t_heap **found_heap,
+t_block *merge_block(t_heap *heap, t_block *block);
+t_heap *create_heap(t_heap_group group, size_t block_size);
+
+void remove_block_if_last(t_heap *heap, t_block *block);
+
+
+void search_ptr(t_heap **found_heap,
     t_block **found_block,
     t_heap *heap,
     void *ptr);

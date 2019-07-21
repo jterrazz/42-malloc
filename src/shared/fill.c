@@ -15,7 +15,7 @@
 
 // Is never at the end, always between
 static  void fill_free_block(t_block *block, size_t size, t_heap *heap) {
-	t_block *free_block = SHIFT_BLOCK(block) + size;
+	t_block *free_block = BLOCK_SHIFT(block) + size;
 
 	init_block(free_block, block->next - free_block);
 	free_block->freed = TRUE;
@@ -37,7 +37,7 @@ static t_block*find_free_block(size_t size, t_heap **found_heap)
 	group = get_heap_group_from_block_size(size);
 
     while (heap) {
-        block = (t_block *)SHIFT_HEAP(heap);
+        block = (t_block *)HEAP_SHIFT(heap);
 
         while (heap->group == group && block) {
             if (block->freed && (block->data_size >= size + sizeof(t_block))) {
