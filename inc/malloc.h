@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 09:48:56 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 10:05:42 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ SMALL     TINY LARGE
 extern pthread_mutex_t		g_ft_malloc_mutex;
 
 typedef enum e_bool { FALSE, TRUE }				bool;
-typedef enum e_bool_bef { B_NULL = 0, B_FALSE, B_TRUE }				bool_bef;
+typedef enum e_bool_bef { B_NULL = 0, B_FALSE, B_TRUE }				t_bool_bef;
 typedef enum e_heap_group { TINY, SMALL, LARGE }	t_heap_group;
 typedef enum e_memory_event { ALLOCATE, DEALLOCATE } t_memory_event;
 typedef enum e_call_event { MALLOC, CALLOC, FREE, REALLOC, REALLOCF } t_call_event;
 
-typedef enum e_env { ENV_STACK_LOGGING, ENV_FULL_LOGGING, ENV_SCRIBLE } t_env;
+typedef enum e_env { ENV_STACK_LOGGING = 1<<0, ENV_FULL_LOGGING = 1<<1, ENV_SCRIBBLE = 1<<2 } t_env;
 
 /*
 ** A heap stores data about one mapped zone

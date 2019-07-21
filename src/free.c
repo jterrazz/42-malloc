@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:08:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 09:48:41 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 10:05:50 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void unmap_if_empty(t_heap *heap)
     if (block && heap) {
         block->freed = TRUE;
 
-        if (getenv_cached(ENV_SCRIBLE))
+        if (getenv_cached(ENV_SCRIBBLE))
             ft_memset(ptr, 0x55, block->data_size);
 
         ret = merge_near_freed_blocks(heap, block);

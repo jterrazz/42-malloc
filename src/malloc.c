@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 09:46:01 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 10:05:45 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void *malloc(size_t size)
     pthread_mutex_lock(&g_ft_malloc_mutex);
     if ((res = start_malloc(size))) {
         log_stack(ALLOCATE, (size_t) res, size); // Use modulo here if applicate
-        if (getenv_cached(ENV_SCRIBLE)) ft_memset(res, 0xaa, size);
+        if (getenv_cached(ENV_SCRIBBLE)) ft_memset(res, 0xaa, size);
     }
     pthread_mutex_unlock(&g_ft_malloc_mutex);
 
