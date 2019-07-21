@@ -16,7 +16,7 @@
 void show_heap_list()
 {
     int i = 0;
-    t_heap *heap = get_default_heap();
+    t_heap *heap = g_heap_anchor;
 
     printf("DEBUG: heap list\n");
 

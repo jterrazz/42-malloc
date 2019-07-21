@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:25:37 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 14:58:35 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 ** Memory allocations are 16-byte aligned, as exepected on MacOS (with vim for example)
 */
 
-// Dont unmap first zones + convert to 3 ptr types
-
 void *start_malloc(size_t size)
 {
     t_heap *heap;
@@ -31,7 +29,7 @@ void *start_malloc(size_t size)
 
     if (!size)
         return (NULL);
-    size = (size + 15) & ~15; // Should print this size print in show_mem_alloc ? //Put in medium and macro for the calcccc of modulo :))))))))
+    size = (size + 15) & ~15;
 
     if ((block = try_filling_available_block(size)))
         return (BLOCK_SHIFT(block));
@@ -39,7 +37,7 @@ void *start_malloc(size_t size)
         return (NULL);
 
     res = append_empty_block(heap, size);
-    log_stack(ALLOCATE, (size_t) res, size); // Use modulo here if ????? // Check all show_alloc_mem and other use the asked size (change in realloc, fill ptr etc)
+    log_stack(ALLOCATE, (size_t) res, size);
     return (res);
 }
 

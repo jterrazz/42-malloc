@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 10:58:50 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 11:14:33 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:02:42 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_heap*get_heap_of_block_size(const size_t size)
     t_heap_group	heap_group;
     t_heap		*heap;
 
-    default_heap	= get_default_heap();
+    default_heap	= g_heap_anchor;
     heap_group		= get_heap_group_from_block_size(size);
     heap		= get_available_heap(default_heap,
         heap_group,
@@ -48,7 +48,7 @@ t_heap*get_heap_of_block_size(const size_t size)
         if (heap->next) {
             heap->next->prev = heap;
         }
-        set_default_heap(heap);
+        g_heap_anchor = heap;
     }
 
     return (heap);

@@ -45,7 +45,7 @@ static void show_heap_hex_dump(t_heap *heap) {
 void show_alloc_meme_ex(void) {
 	pthread_mutex_lock(&g_ft_malloc_mutex);
 
-	t_heap *heap = get_default_heap();
+	t_heap *heap = g_heap_anchor;
 
 	while (heap) {
 		show_heap_hex_dump(heap);

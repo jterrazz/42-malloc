@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:50:59 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:22:42 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/21 15:01:11 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ SMALL     TINY LARGE
 #include <sys/mman.h>
 #include <sys/resource.h>
 
-//tmp
-extern pthread_mutex_t		g_ft_malloc_mutex;
-
 typedef enum e_t_bool { FALSE, TRUE }				t_bool;
 typedef enum e_t_bool_bef { B_NULL = 0, B_FALSE, B_TRUE }				t_t_bool_bef;
 typedef enum e_heap_group { TINY, SMALL, LARGE }	t_heap_group;
@@ -56,8 +53,6 @@ typedef enum e_env { ENV_STACK_LOGGING = 1<<0, ENV_FULL_LOGGING = 1<<1, ENV_SCRI
 ** A heap stores data about one mapped zone
 */
 
-// default heap global
-
 typedef struct s_heap {
     struct s_heap	*prev;
     struct s_heap	*next;
@@ -66,6 +61,9 @@ typedef struct s_heap {
     size_t		free_size;
     size_t		block_count;
 } t_heap;
+
+extern pthread_mutex_t		g_ft_malloc_mutex;
+extern t_heap *g_heap_anchor;
 
 /*
 ** A block stores data for each malloc call
@@ -99,10 +97,8 @@ t_block *get_last_block(t_block *block);
 void	*start_malloc(size_t size);
 void	start_free(void *ptr);
 void	*start_realloc(void *ptr, size_t size);
-t_heap		*get_default_heap(void);
 t_heap		*get_last_heap(t_heap *heap);
 t_heap		*get_heap_of_block_size(const size_t size);
-void		set_default_heap(t_heap *heap);
 t_heap_group	get_heap_group_from_block_size(size_t size);
 size_t		get_heap_size_from_block_size(size_t size);
 void		print_heap_group(t_heap *heap);

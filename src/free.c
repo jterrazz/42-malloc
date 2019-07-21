@@ -23,7 +23,7 @@
 
 void start_free(void *ptr)
 {
-    t_heap	*heap	= get_default_heap();
+    t_heap	*heap	= g_heap_anchor;
     t_block	*block	= NULL;
     t_block	*ret;
 

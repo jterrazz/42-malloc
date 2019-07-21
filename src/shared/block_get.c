@@ -26,7 +26,7 @@ void find_available_block(size_t size, t_heap **res_heap, t_block **res_block)
     t_block		*block;
     t_heap_group	group;
 
-	heap = get_default_heap();
+	heap = g_heap_anchor;
 	group = get_heap_group_from_block_size(size);
 
     while (heap) {

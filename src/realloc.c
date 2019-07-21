@@ -27,7 +27,7 @@ void *start_realloc(void *ptr, size_t size)
     if (!ptr)
         return (start_malloc(size));
 
-    heap = get_default_heap();
+    heap = g_heap_anchor;
     search_ptr(&heap, &block, heap, ptr);
 
     if (!heap || !block)

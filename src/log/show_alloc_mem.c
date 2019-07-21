@@ -56,7 +56,7 @@ void start_show_alloc_mem()
         size_t	total;
 
         total	= 0;
-        first_heap = get_default_heap();
+        first_heap = g_heap_anchor;
         last_heap	= get_last_heap(first_heap);
 
         while (last_heap) {
