@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 17:56:30 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 10:44:54 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 13:12:22 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	log_allocation(int fd, size_t size)
 {
-	ft_putstr_fd(" allocated ", fd);
+	ft_putstr_fd("Allocated ", fd);
 	ft_itoa_fd(size, 10, fd, FALSE);
 	ft_putstr_fd(" bytes\n", fd);
 }
 
 static void	log_deallocation(int fd, size_t size)
 {
-	ft_putstr_fd("Released \n", fd);
+	ft_putstr_fd("Released ", fd);
 	ft_itoa_fd(size, 10, fd, TRUE);
 	ft_putstr_fd(" bytes\n", fd);
 }
