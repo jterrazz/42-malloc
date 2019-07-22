@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 16:06:12 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 11:03:05 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 11:21:10 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_bool	is_last_of_preallocated(t_heap *heap)
 	int				i;
 
 	heap_el = g_heap_anchor;
-	tgroup = heap->group;
+	group = heap->group;
 	i = 0;
 	while (heap_el)
 	{

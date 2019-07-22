@@ -1,1 +1,1 @@
-cd .. && sh insert_lib.sh && ./test/test
+cd .. && sh run.sh && ./test/test
