@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 18:47:16 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 12:08:43 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 12:17:27 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static void test_malloc_one()
         printf("malloc(1) should return ptr\n");
         return;
     }
+    t[0] = 0xFF;
+    t[1] = 0xFF;
+    t[2] = 0xFF;
+    t[3] = 0xFF;
+    show_alloc_mem_hex();
+
     t[0] = 0;
     free(t);
 }
@@ -53,6 +59,7 @@ static void test_malloc_limits()
 
     // Should print mallocs in all categories (TINY, SMALL, LARGE)
     // show_alloc_mem();
+    // show_alloc_mem_hex();
     // show_heap_list();
     free(t0);
 
@@ -77,11 +84,11 @@ static void test_malloc_free_size()
 
 void run_test_malloc(void)
 {
-    test_malloc_null();
+    // test_malloc_null();
     test_malloc_one();
-    test_malloc_getpagesize();
-    test_malloc_limits();
-    test_malloc_free_size();
+    // test_malloc_getpagesize();
+    // test_malloc_limits();
+    // test_malloc_free_size();
 
     // show_alloc_mem();
     // show_heap_list();
