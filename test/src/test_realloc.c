@@ -6,11 +6,12 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 18:47:22 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/31 20:31:22 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 11:23:19 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <string.h>
 #include "./test.h"
 
 static void realloc_null_ptr() {

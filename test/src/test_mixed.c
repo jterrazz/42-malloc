@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 18:47:10 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/05/31 20:55:48 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 11:22:59 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void test_show_alloc_mem_ex(void) {
 	test[3] = 5;
 	test[4] = 5;
 	test[5] = 5;
-	show_alloc_meme_ex();
+	show_alloc_mem_hex();
 	free(test);
 	free(test2);
 }
