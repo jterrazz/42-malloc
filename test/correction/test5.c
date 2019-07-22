@@ -6,13 +6,13 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:17:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 15:17:08 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 11:17:52 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/malloc.h"
 
-int main()
+int	main(void)
 {
 	malloc(1024);
 	malloc(1024 * 32);

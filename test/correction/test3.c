@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 14:52:33 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/21 14:59:27 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 11:17:32 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 #define M 1024 * 1024
 
-void print(char *s)
+void	print(char *s)
 {
 	write(1, s, strlen(s));
 }
 
-int main()
+int		main(void)
 {
 	char *addr1;
 	char *addr2;
