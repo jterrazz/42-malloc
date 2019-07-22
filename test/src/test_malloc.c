@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 18:47:16 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/06/01 00:36:48 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 12:08:43 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ static void test_malloc_getpagesize()
     free(t);
 }
 
+// !!!!!!!!!!!!!!!!
+// TODO SHOULD FILL 3 sizes
+// CHECK To free all, see if the TINY and SMALL stay
 static void test_malloc_limits()
 {
+    void	*t	= malloc(1);
     void	*t0	= malloc(TINY_BLOCK_SIZE);
     void	*t00	= malloc(TINY_BLOCK_SIZE);
     void	*t000	= malloc(TINY_BLOCK_SIZE);
@@ -48,6 +52,8 @@ static void test_malloc_limits()
     void	*t2	= malloc(SMALL_BLOCK_SIZE + 1);
 
     // Should print mallocs in all categories (TINY, SMALL, LARGE)
+    // show_alloc_mem();
+    // show_heap_list();
     free(t0);
 
     t0 = malloc(TINY_BLOCK_SIZE - sizeof(t_block));
@@ -80,3 +86,10 @@ void run_test_malloc(void)
     // show_alloc_mem();
     // show_heap_list();
 }
+
+
+    // ft_putstr("data_size: ");
+    // ft_itoa_base(block->data_size, 10, 0, FALSE);
+    // ft_putstr(" sup to : ");
+    // ft_itoa_base(size + sizeof(t_block), 10, 0, FALSE);
+    // ft_putstr("\n");

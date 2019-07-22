@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 11:28:38 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 11:33:21 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 12:09:10 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,24 @@ static void *run_test_thread() {
 }
 
 int main(void) {
-	// pthread_t *thread = malloc(sizeof(pthread_t) * 100);
+	pthread_t *thread = malloc(sizeof(pthread_t) * 100);
 
 	run_test_malloc();
 	run_test_realloc();
-	// run_test_mixed();
+	run_test_mixed();
 
-	// int i = 0;
-	// while (i < 100) {
-	// 	if (pthread_create(thread + i, NULL, run_test_thread, NULL)) {
-	// 		printf("Error pthread");
-	// 		return EXIT_FAILURE;
-	// 	}
-	// 	// if (pthread_join(thread[i], NULL)) {
-	// 	// 	printf("error pthread join");
-	// 	// 	return EXIT_FAILURE;
-	// 	// }
-	// 	i++;
-	// }
-	//
-	// run_test_rlimit(); // Always at the end
+	int i = 0;
+	while (i < 100) {
+		if (pthread_create(thread + i, NULL, run_test_thread, NULL)) {
+			printf("Error pthread");
+			return EXIT_FAILURE;
+		}
+		// if (pthread_join(thread[i], NULL)) {
+		// 	printf("error pthread join");
+		// 	return EXIT_FAILURE;
+		// }
+		i++;
+	}
+
+	run_test_rlimit(); // Always at the end
 }

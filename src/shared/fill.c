@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 23:47:26 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 11:43:57 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 11:56:50 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ t_block			*try_filling_available_block(size_t size)
 	find_available_block(size, &heap, &block);
 	if (block && heap)
 	{
-		ft_putstr("33");
 		divide_block(block, size, heap);
-		ft_putstr("44");
 		return (block);
 	}
 	return (NULL);
