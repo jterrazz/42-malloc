@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 17:44:52 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 10:42:09 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 11:38:13 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 ** The realloc() function changes the size of the memory block pointed to
 ** by ptr to size bytes. The contents will be unchanged in the range from
 ** the start of the region up to the minimum of the old and new sizes.
+** I decided to use the linux implementation for realloc(ptr, 0), it free the
+** ptr and returns NULL
 */
 
 void*start_realloc(void *ptr, size_t size)
@@ -26,6 +28,11 @@ void*start_realloc(void *ptr, size_t size)
 
 	if (!ptr)
 		return (start_malloc(size));
+	else if (size == 0)
+	{
+		start_free(ptr);
+		return (NULL);
+	}
 	heap = g_heap_anchor;
 	search_ptr(&heap, &block, heap, ptr);
 	if (!heap || !block)

@@ -6,7 +6,7 @@
 /*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 14:20:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 10:37:59 by jterrazz         ###   ########.fr       */
+/*   Updated: 2019/07/22 11:42:24 by jterrazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	*start_malloc(size_t size)
 void	*malloc(size_t size)
 {
 	void *res;
-
 	pthread_mutex_lock(&g_ft_malloc_mutex);
 	log_detail(MALLOC);
 	if ((res = start_malloc(size)) && getenv_cached(ENV_SCRIBBLE))
