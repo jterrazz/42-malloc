@@ -4,7 +4,7 @@
 
 Custom C implementation of the malloc library functions. It creates the shared library `libft_malloc.so` which can be used to replace malloc in any system commands.
 
-[Access the related medium article here](https://medium.com/a-42-journey/how-to-create-your-own-malloc-library-b86fedd39b96)
+[Access the related article here](https://www.jterrazz.com/articles/1-build-your-own-malloc-in-c)
 
 It exposes the following methods:
 
