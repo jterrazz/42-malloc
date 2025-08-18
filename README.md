@@ -1,10 +1,10 @@
-> Hey there, app enthusiasts! 👋 Ready to dive into the world of game-changing apps? At [jterrazz.com](https://jterrazz.com), I'm all about crafting useful applications and sharing the journey! Discover coding insights, self-improvement hacks, and sneak peeks of my latest projects (psst... my next app is all about leveling up in life! 🚀). Come along for the ride - you might just find the spark for your next big idea! 💡💻
+*Hey there – I’m Jean-Baptiste, just another developer doing weird things with code. All my projects live on [jterrazz.com](https://jterrazz.com) – complete with backstories and lessons learned. Feel free to poke around – you might just find something useful!*
 
 # Malloc
 
 Custom C implementation of the malloc library functions. It creates the shared library `libft_malloc.so` which can be used to replace malloc in any system commands.
 
-[Access the related article here](https://www.jterrazz.com/articles/1-build-your-own-malloc-in-c)
+[Access the related article here](https://www.jterrazz.com/articles/1-master-memory-management-i-built-my-own-malloc-and-you-should-too)
 
 It exposes the following methods:
 
@@ -46,7 +46,7 @@ make && sh ./run_test.sh
 
 ## Implementation
 
-To understand in detail this implementation, [**please refer to the medium article**](https://medium.com/a-42-journey/how-to-create-your-own-malloc-library-b86fedd39b96) of this project.
+To understand in detail this implementation, [**please refer to the article**](https://www.jterrazz.com/articles/1-master-memory-management-i-built-my-own-malloc-and-you-should-too) of this project.
 
 Bonus:
 - `calloc()`, `reallocf()`
