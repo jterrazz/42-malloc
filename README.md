@@ -4,7 +4,7 @@
 
 Custom C implementation of the malloc library functions. It creates the shared library `libft_malloc.so` which can be used to replace malloc in any system commands.
 
-**[Access the repository story here](https://www.jterrazz.com/articles/1-master-memory-management-i-built-my-own-malloc-and-you-should-too)**
+**[Access the repository story here](https://www.jterrazz.com/articles/6-my-journey-into-expert-systems-with-python)**
 
 It exposes the following methods:
 
@@ -46,7 +46,7 @@ make && sh ./run_test.sh
 
 ## Implementation
 
-To understand in detail this implementation, [**please refer to the article**](https://www.jterrazz.com/articles/1-master-memory-management-i-built-my-own-malloc-and-you-should-too) of this project.
+To understand in detail this implementation, [**please refer to the article**](https://www.jterrazz.com/articles/6-my-journey-into-expert-systems-with-python) of this project.
 
 Bonus:
 - `calloc()`, `reallocf()`
